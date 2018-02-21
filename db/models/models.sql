@@ -8,7 +8,7 @@
 -- ---
 -- Table 'Users'
 --
--- ---
+-- --
 CREATE DATABASE Crawlr;
 USE Crawlr;
 
