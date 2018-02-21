@@ -16,7 +16,7 @@ class Search extends React.Component{
   }
 
   handleSubmit(event) {
-    $.post('/search', {id: this.state.term}, function (data) {
+    $.post('/search', this.state.term, function (data) {
       console.log("line 18", id)
     })
   }
