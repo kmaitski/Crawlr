@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser - require('body-parser');
+const bodyParser = require('body-parser');
 
 var server = express();
 var port = process.env.PORT || 1337;
@@ -12,6 +12,11 @@ server.listen(port, function() {
   console.log('Listening on port ' + port);
 });
 
-server.get('/routes', function(req, res) {
+server.get('/Crawl', function(req, res) {
   res.send('ayy');
+});
+
+server.post('/Crawl', function(req, res) {
+
+  res.send(data);
 });

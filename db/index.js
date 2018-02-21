@@ -1,5 +1,7 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('Crawlr', 'root', '');
+var db = new Sequelize('crawlr', 'root', '', {
+  dialect: 'mysql'
+});
 
 var User = db.define('User', {
   username: Sequelize.STRING
