@@ -1,26 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Search from './Search.jsx';
-import Form from './Form.jsx';
+/*                    index
+search    map      crawlentrylist       searchlist
+                    crawlentry          searchitem
 
-class App extends React.Component {
-  constructor(props) {
-  	super(props);
+index has handleSearch -> passed to search
+      has handlesearchitemADDclick -> passed to searchlist, then searchitem
+      has handlemapmarkerADDclick -> passed to map
+        has state that on marker/searchitem click, changes which tells crawlentry to add new item
 
-  }
-  render() {
-  	return (
-    <div>
-    <h1>Crawlr: A Pub Crawl Creator</h1>
-    <h2>First, enter your city of choice!</h2>
-  	<div>
+search has handleinput change
 
+map has api stuffz
 
-      <Form />
-  	</div>
-    </div>
-  	)
-  }
-}
+searchlist passes handlesearchitemclick to searchitem
 
-ReactDOM.render(<App />, document.getElementById('app'));
+crawlentry is generated when info from index state changes by click from searchitem or map
+*/
