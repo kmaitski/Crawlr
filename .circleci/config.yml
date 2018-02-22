@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/mern-starter
+    working_directory: ~/Crawlr
     # The primary container is an instance of the first list image listed. Your build commands run in this container.
     docker:
       - image: circleci/node:4.8.2
