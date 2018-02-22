@@ -11,7 +11,7 @@ class Search extends React.Component {
       searchText: e.target.value
     });
   }
- //potentially not 'this' at button onclick
+
   render() {
     return (
       <div>
