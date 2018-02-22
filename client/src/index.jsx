@@ -22,6 +22,7 @@ import Search from './Search.jsx';
 import MapView from './MapView.jsx';
 import CrawlEntryList from './CrawlEntryList.jsx';
 import SearchList from './SearchList.jsx';
+import MapContainer from './MapContainer.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -48,13 +49,11 @@ class App extends React.Component {
           <Search onSubmit={this.handleSearch}/>
         </div>
         <div>
-          <MapView onMarkerAddClick={this.handleMapMarkerAdd}/>
+          <MapContainer />
         </div>
         <div>
-          <SearchList onSearchItemAddClick={this.handleSearchItemAdd}/>
         </div>
         <div>
-          <CrawlEntryList newBar={this.state.barAdded}/>
         </div>
       </div>
     )
