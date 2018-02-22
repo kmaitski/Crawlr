@@ -9,8 +9,8 @@ class Form extends React.Component {
   constructor(props) {
   	super(props);
   	this.state = {
-      url: "https://www.google.com/maps/embed/v1/search?key=AIzaSyD8_cjmGOuOCn5Zg_anj26EdMz6whGu82I&q=bars+near+Austin+Tx",
-  	  location: '',
+      url: "https://www.google.com/maps/embed/v1/search?zoom=13&key=AIzaSyD8_cjmGOuOCn5Zg_anj26EdMz6whGu82I&q=bars+near+Austin+Tx",
+  	  city: '',
   	  bar1: '',
   	  bar2: '',
   	  bar3: '',
@@ -30,17 +30,16 @@ class Form extends React.Component {
       return returnObj;
     }.bind(event)();
 
-   this.setState( stateObject );    
+   this.setState( stateObject );
 
   }
 
   handleFormClick(event) {
     event.preventDefault();
-    let newUrl = `https://www.google.com/maps/embed/v1/directions?origin=${this.state.bar1}&destination=${this.state.bar2}&key=AIzaSyD8_cjmGOuOCn5Zg_anj26EdMz6whGu82I`
+    let newUrl = `https://www.google.com/maps/embed/v1/directions?origin=${this.state.bar1}+${this.state.city}&waypoints=${this.state.bar2}+${this.state.city}|${this.state.bar3}+${this.state.city}&mode=walking&destination=${this.state.bar4}+${this.state.city}&key=AIzaSyD8_cjmGOuOCn5Zg_anj26EdMz6whGu82I`
     this.setState({
       url: newUrl
     })
-
   }
 
   onFormChange(event) {
@@ -48,16 +47,20 @@ class Form extends React.Component {
   }
 
   handleSearchSubmit(event) {
-    this.setState({location: event.target.value});
+    event.preventDefault();
+    let newUrl = `https://www.google.com/maps/embed/v1/search?key=AIzaSyD8_cjmGOuOCn5Zg_anj26EdMz6whGu82I&q=bars+near+${this.state.city}`
+    this.setState({
+      url: newUrl
+    })
   }
 
   render() {
     console.log(this.state)
   	return (
     <div>
-    <div> 
+    <div>
       <form onSubmit={this.handleSearchSubmit}>
-        <input type="text" onFormChange={this.onFormChange} /> 
+        <input type="text" name="city" onChange={this.formChange} placeholder="Enter city here..." />
         <input type="submit" value="Search" />
       </form>
     </div>
@@ -66,11 +69,11 @@ class Form extends React.Component {
       src={this.state.url} allowFullScreen>
     </iframe>
     <form>
-      <input name="city" onChange={this.formChange} type="text" /> 
-      <input name="bar1" onChange={this.formChange} type="text" /> 
-      <input name="bar2" onChange={this.formChange} type="text" /> 
-      <input name="bar3" onChange={this.formChange} type="text" /> 
-      <input name="bar4" onChange={this.formChange} type="text" /> 
+      <h4>Enter four destinations in the order you'd like to crawl!</h4>
+      <input name="bar1" onChange={this.formChange} type="text" placeholder="Starting Bar"/>
+      <input name="bar2" onChange={this.formChange} type="text" placeholder="Second Bar"/>
+      <input name="bar3" onChange={this.formChange} type="text" placeholder="Third Bar"/>
+      <input name="bar4" onChange={this.formChange} type="text" placeholder="Final Bar"/>
       <input type="submit" value="Submit" onClick={this.handleFormClick} />
     </form>
     </div>
@@ -78,8 +81,8 @@ class Form extends React.Component {
   }
 }
 
-  
 
-  
+
+
 
 export default Form;
