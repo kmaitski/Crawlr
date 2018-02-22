@@ -27,7 +27,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      barAdded: {}
+      barAdded: {},
       searchValue: ''
     }
     this.handleSearch = this.handleSearch.bind(this);

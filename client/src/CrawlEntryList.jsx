@@ -1,6 +1,5 @@
 import CrawlEntry from './CrawlEntry.jsx';
 
-// this.props.newbar might be wrong?
 const CrawlEntryList = (props) => {
 return (
     <ul>
