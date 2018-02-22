@@ -12,6 +12,7 @@
 //   city: Sequelize.STRING
 // });
 
+
 // var Bar = db.define('Bar', {
 //   name: Sequelize.STRING
 // });
