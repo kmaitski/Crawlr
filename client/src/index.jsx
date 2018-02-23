@@ -31,9 +31,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      barsFromSearch: {},
+
+      barAdded: {},
       searchValue: '',
-      searchLocation: {}
+      barList: [],
+      location: {lat: 30.2672, lng: -97.7431}
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSearchItemAdd = this.handleSearchItemAdd.bind(this);
@@ -47,10 +49,10 @@ class App extends React.Component {
     //do post request to server with search value
     let location = {location: searchText}
     $.post('/Search', location, (data) => {
-      console.log(data);
+
       this.setState({
-        barsFromSearch: data.barList,
-        searchLocation: data.coor
+        barList: data.barList,
+        location: data.coor
       });
     });
   }
@@ -66,7 +68,7 @@ class App extends React.Component {
           <Search onSubmit={this.handleSearch}/>
         </div>
         <div>
-          <MapContainer bars={this.state.barsFromSearch} location={this.state.searchLocation}/>
+          <MapContainer barlist={this.state.barList} location={this.state.location} />
         </div>
         <div>
         </div>
