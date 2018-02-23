@@ -36,7 +36,13 @@ class App extends React.Component {
     this.handleMapMarkerAdd = this.handleMapMarkerAdd.bind(this);
   }
   componentDidMount() {}
-  handleSearch () {}
+  handleSearch (searchText) {
+    console.log('hit handlesearch in index.jsx, searchtext is:', searchText);
+    //set searchvalue state to search
+    this.setState({searchValue: searchText});
+    //do post request to server with search value
+    $.post('/Search', searchText);
+  }
   handleSearchItemAdd() {}
   handleMapMarkerAdd() {}
 

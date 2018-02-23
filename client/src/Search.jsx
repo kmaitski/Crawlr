@@ -8,11 +8,17 @@ class Search extends React.Component {
       searchText: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.submitClick = this.submitClick.bind(this);
   }
   handleInputChange(e) {
     this.setState({
       searchText: e.target.value
     });
+  }
+  submitClick() {
+    console.log(this.props);
+    console.log('hit submitclick in search.jsx');
+    this.props.onSubmit(this.state.searchText)
   }
 
   render() {
@@ -23,7 +29,7 @@ class Search extends React.Component {
         value={this.state.searchText}
         onChange={this.handleInputChange}
         />
-        <button onClick={this.props.onSubmit}>
+        <button onClick={this.submitClick}>
         Search
         </button>
       </div>
