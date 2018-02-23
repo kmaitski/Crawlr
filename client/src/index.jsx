@@ -23,6 +23,7 @@ import MapView from './MapView.jsx';
 import CrawlEntryList from './CrawlEntryList.jsx';
 import SearchList from './SearchList.jsx';
 import MapContainer from './MapContainer.jsx'
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,7 +42,10 @@ class App extends React.Component {
     //set searchvalue state to search
     this.setState({searchValue: searchText});
     //do post request to server with search value
-    $.post('/Search', searchText);
+    let location = {location: searchText}
+    $.post('/Search', location, () => {
+      console.log('searched');
+    });
   }
   handleSearchItemAdd() {}
   handleMapMarkerAdd() {}

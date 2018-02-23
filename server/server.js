@@ -20,8 +20,17 @@ server.get('/Crawl', function(req, res) {
 });
 
 server.post('/Search', (req, res) => {
+  // console.log(req.body);
+  // req.on('data', chunk => {
+  //   console.log(chunk.toString());
+  // })
+  let location = req.body.location;
+  // location.split(' ').join('');
+  // console.log(location);
+  location = location.replace(/\s/g, '+');
+  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0';
   let options = {
-    url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+austin,tx&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0',
+    url: newUrl,
     headers: {
       'User-Agent': 'request'
     }
