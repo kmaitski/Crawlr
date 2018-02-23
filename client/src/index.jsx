@@ -43,8 +43,8 @@ class App extends React.Component {
     this.setState({searchValue: searchText});
     //do post request to server with search value
     let location = {location: searchText}
-    $.post('/Search', location, () => {
-      console.log('searched');
+    $.post('/Search', location, (data) => {
+      console.log(data);
     });
   }
   handleSearchItemAdd() {}

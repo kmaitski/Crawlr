@@ -20,13 +20,7 @@ server.get('/Crawl', function(req, res) {
 });
 
 server.post('/Search', (req, res) => {
-  // console.log(req.body);
-  // req.on('data', chunk => {
-  //   console.log(chunk.toString());
-  // })
   let location = req.body.location;
-  // location.split(' ').join('');
-  // console.log(location);
   location = location.replace(/\s/g, '+');
   let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0';
   let options = {
@@ -36,30 +30,27 @@ server.post('/Search', (req, res) => {
     }
   }
   request(options, function(err, response, body) {
-    // console.log(res.send);
-    res.send(JSON.parse(body));
+    let bars = JSON.parse(body);
+    bars = bars.results;
+    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0';
+    let otherOptions = {
+      url: otherUrl,
+      headers: {
+        'User-Agent': 'request'
+      }
+    }
+    request(otherOptions, (err, response, body) => {
+      let location = JSON.parse(body);
+      // console.log(location.results[0].geometry.location);
+      let coordinates = location.results[0].geometry.location;
+      let coordinatesAndBars = {
+        barList: bars,
+        coor: coordinates
+      };
+      console.log(coordinatesAndBars);
+      res.send(coordinatesAndBars);
+    })
   });
-  // res.end('');
-  // server.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+austin,tx&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0', data => {
-  //     res.send(data);
-  //   });
-    // axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+austin,tx&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0').then(response => {
-    //   res.send(response);
-    // })
-  //   $.ajax({
-  //     url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+austin,tx&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0`,
-  //     dataType: 'JSONP',
-  //     // jsonpCallback: 'callback',
-  //     type: 'GET',
-  //     success: function (data) {
-  //         res.send(data);
-  //     }
-  // });
-
-  // req.on('data', chunk => {
-  //   let location = chunk.toString();
-  // });
-
 })
 
 server.post('/Crawl', function(req, res) {
