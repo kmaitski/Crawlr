@@ -22,7 +22,7 @@ server.get('/Crawl', function(req, res) {
 server.post('/Search', (req, res) => {
   let location = req.body.location;
   location = location.replace(/\s/g, '+');
-  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0';
+  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyCDKWpDcmNdporMyWf-4gLaf2X75zGFdnE';
   let options = {
     url: newUrl,
     headers: {
@@ -32,7 +32,8 @@ server.post('/Search', (req, res) => {
   request(options, function(err, response, body) {
     let bars = JSON.parse(body);
     bars = bars.results;
-    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyAqfX2cTT6QXJco_jQ0OjVbJ6j6bTPfze0';
+    console.log(bars);
+    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=AIzaSyCDKWpDcmNdporMyWf-4gLaf2X75zGFdnE';
     let otherOptions = {
       url: otherUrl,
       headers: {
@@ -41,7 +42,6 @@ server.post('/Search', (req, res) => {
     }
     request(otherOptions, (err, response, body) => {
       let location = JSON.parse(body);
-      // console.log(location.results[0].geometry.location);
       let coordinates = location.results[0].geometry.location;
       let coordinatesAndBars = {
         barList: bars,

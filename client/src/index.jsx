@@ -25,12 +25,15 @@ import SearchList from './SearchList.jsx';
 import MapContainer from './MapContainer.jsx'
 import $ from 'jquery';
 
+// let intialBars =
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      barAdded: {},
-      searchValue: ''
+      barsFromSearch: {},
+      searchValue: '',
+      searchLocation: {}
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSearchItemAdd = this.handleSearchItemAdd.bind(this);
@@ -45,6 +48,10 @@ class App extends React.Component {
     let location = {location: searchText}
     $.post('/Search', location, (data) => {
       console.log(data);
+      this.setState({
+        barsFromSearch: data.barList,
+        searchLocation: data.coor
+      });
     });
   }
   handleSearchItemAdd() {}
@@ -59,7 +66,7 @@ class App extends React.Component {
           <Search onSubmit={this.handleSearch}/>
         </div>
         <div>
-          <MapContainer />
+          <MapContainer bars={this.state.barsFromSearch} location={this.state.searchLocation}/>
         </div>
         <div>
         </div>
