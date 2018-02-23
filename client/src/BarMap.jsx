@@ -1,18 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Google from 'google-maps-react';
 
 class BarMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
     // console.log(this.props);
+    console.log(Google);
+    this.loadMap();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.google !== this.props.google) {
-      this.loadMap();
-    }
-  }
+  // componentDidMount(prevProps, prevState) {
+  //   if (prevProps.google !== this.props.google) {
+  //     console.log('update');
+  //     this.loadMap();
+  //   }
+  // }
 
   loadMap() {
     if (this.props && this.props.google) {
@@ -21,12 +25,20 @@ class BarMap extends React.Component {
       const mapRef = document.getElementById('map');
       const node = ReactDOM.findDOMNode(mapRef);
       const mapConfig = Object.assign({}, {
-        center: {lat: 30.2672, lng: -97.7431},
+        center: {lat: 30.267153, lng:-97.7430608},
         zoom: 10,
         getsureHandling: 'cooperative',
         mapTypeId: 'terrain'
       });
       this.map = new maps.Map(node, mapConfig);
+      this.props.bars.map(bar => {
+        const marker = new google.maps.Marker({
+          position: {lat: bar.geometry.location.lat, lng: bar.geometry.location.lng},
+          map: this.map,
+          title: bar.name,
+          icon: {url: bar.icon}
+        });
+      })
     }
   }
 
