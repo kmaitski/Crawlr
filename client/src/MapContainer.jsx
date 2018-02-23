@@ -11,11 +11,14 @@ class MapContainer extends React.Component {
     this.state = {};
   }
 
-
   render() {
     return (
       <div>
-      <BarMap barlist={this.props.barlist} location={this.props.location} google={this.props.google} />
+      <BarMap
+      addbar={this.props.addbar}
+      barlist={this.props.barlist}
+      location={this.props.location}
+      google={this.props.google} />
       </div>
     )
   }

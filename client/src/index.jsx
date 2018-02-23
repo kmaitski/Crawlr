@@ -32,14 +32,13 @@ class App extends React.Component {
     super(props);
     this.state = {
 
-      barAdded: {},
+      barAdded: [],
       searchValue: '',
       barList: [],
       location: {lat: 30.2672, lng: -97.7431}
     }
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleSearchItemAdd = this.handleSearchItemAdd.bind(this);
-    this.handleMapMarkerAdd = this.handleMapMarkerAdd.bind(this);
+    this.handleBarAdd = this.handleBarAdd.bind(this);
   }
   componentDidMount() {}
   handleSearch (searchText) {
@@ -57,7 +56,14 @@ class App extends React.Component {
     });
   }
   handleSearchItemAdd() {}
-  handleMapMarkerAdd() {}
+  handleBarAdd(bar) {
+    console.log('good job u clicked it')
+    var newBarList = this.state.barAdded;
+    newBarList.push(bar);
+    this.setState({
+      barAdded: newBarList
+    })
+  }
 
   render() {
     return (
@@ -68,7 +74,7 @@ class App extends React.Component {
           <Search onSubmit={this.handleSearch}/>
         </div>
         <div>
-          <MapContainer barlist={this.state.barList} location={this.state.location} />
+          <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />
         </div>
         <div>
         </div>

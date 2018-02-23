@@ -5,12 +5,17 @@ import Google from 'google-maps-react';
 class BarMap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selected: {}
+    };
     // console.log(this.props);
     console.log(Google);
     this.loadMap();
   }
 
+  handleWindowClick(bar) {
+    this.props.addbar(this.state.selected);
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
@@ -37,10 +42,25 @@ class BarMap extends React.Component {
       });
       this.map = new maps.Map(node, mapConfig);
       this.props.barlist.map(bar => {
+        const infostring = `<div>
+        <h1>${bar.name}</h1>
+        <p>${bar.formatted_address}</p>
+        <p>Rating: ${bar.rating}</p>
+        <p onClick=${this.handleWindowClick}>Add bar to crawl</p>
+        </div>`
+        const info = new google.maps.InfoWindow({
+          content: infostring
+        })
         const marker = new google.maps.Marker({
           position: {lat: bar.geometry.location.lat, lng: bar.geometry.location.lng},
           map: this.map,
           title: bar.name,
+        });
+        marker.addListener('click', function() {
+          this.setState({
+            selected: bar
+          })
+          info.open(map, marker);
         });
       })
     }
