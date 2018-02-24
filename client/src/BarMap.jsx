@@ -10,10 +10,12 @@ class BarMap extends React.Component {
     };
     // console.log(this.props);
     console.log(Google);
+    this.handleWindowClick = this.handleWindowClick.bind(this);
     this.loadMap();
   }
 
   handleWindowClick(bar) {
+    console.log('info window clicked')
     this.props.addbar(this.state.selected);
   }
 
@@ -28,6 +30,7 @@ class BarMap extends React.Component {
 
   loadMap() {
     if (this.props && this.props.google) {
+      const barmap = this;
       const location = this.props.location
       const {google} = this.props;
       const maps = google.maps;
@@ -46,7 +49,8 @@ class BarMap extends React.Component {
         <h1>${bar.name}</h1>
         <p>${bar.formatted_address}</p>
         <p>Rating: ${bar.rating}</p>
-        <p onClick=${this.handleWindowClick}>Add bar to crawl</p>
+
+        <p onClick=${this.handleWindowClick} >Add bar to crawl</p>
         </div>`
         const info = new google.maps.InfoWindow({
           content: infostring
@@ -57,7 +61,7 @@ class BarMap extends React.Component {
           title: bar.name,
         });
         marker.addListener('click', function() {
-          this.setState({
+          barmap.setState({
             selected: bar
           })
           info.open(map, marker);

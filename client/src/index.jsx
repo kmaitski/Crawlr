@@ -40,7 +40,7 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleBarAdd = this.handleBarAdd.bind(this);
   }
-  componentDidMount() {}
+
   handleSearch (searchText) {
     console.log('hit handlesearch in index.jsx, searchtext is:', searchText);
     //set searchvalue state to search
