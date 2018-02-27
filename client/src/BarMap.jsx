@@ -47,8 +47,7 @@ class BarMap extends React.Component {
         <h1>${bar.name}</h1>
         <p>${bar.formatted_address}</p>
         <p>Rating: ${bar.rating}</p>
-
-        <p onclick='${barmap.handleWindowClick}' >Add bar to crawl</p>
+        <p>Double click pin to add to crawl </p>
         </div>`
         const info = new google.maps.InfoWindow({
           content: infostring
@@ -68,6 +67,7 @@ class BarMap extends React.Component {
           })
           info.open(map, marker);
         });
+        marker.addListener('dblclick', this.handleWindowClick);
       })
     }
   }

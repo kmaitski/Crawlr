@@ -20,7 +20,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search.jsx';
 import MapView from './MapView.jsx';
-import CrawlEntryList from './CrawlEntryList.jsx';
+import CrawlEntry from './CrawlEntry.jsx';
 import SearchList from './SearchList.jsx';
 import MapContainer from './MapContainer.jsx'
 import $ from 'jquery';
@@ -76,6 +76,7 @@ class App extends React.Component {
           <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />
         </div>
         <div>
+          <CrawlEntry barAdded={this.state.barAdded} />
         </div>
         <div>
         </div>
