@@ -1,0 +1,14 @@
+.bar-entry {
+  border: 2px solid black;
+  margin: auto;
+}
+.crawl-list{
+  border: 1px solid black;
+  display: inline-block;
+  height: 50%;
+}
+#map {
+  border: 1px solid black;
+  display: inline-block;
+  float: left;
+}
