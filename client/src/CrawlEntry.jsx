@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 
 const CrawlEntry = (props) => (
-  <div>
-    {props.barAdded.map(bar=> 
-      <div>{bar.name}</div>
-    )}
-  </div>
+  <ul key={props.bar.id} className="bar-entry">{props.bar.name}</ul>
 );
 
 export default CrawlEntry;
