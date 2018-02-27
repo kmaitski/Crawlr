@@ -7,9 +7,9 @@ return (
     <div className="crawl-list">
     <h2>Crawl Editor</h2>
     <ul>
-      {props.barAdded.map(bar=>
-      <CrawlEntry key={bar.id} bar={bar}/>
-      )}
+      {props.barAdded.map(function(bar, index) {
+      return <CrawlEntry removebar={props.removebar} key={index} index={index} bar={bar}/>
+      })}
     </ul>
     </div>
 )

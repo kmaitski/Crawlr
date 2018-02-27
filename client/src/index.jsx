@@ -39,6 +39,7 @@ class App extends React.Component {
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleBarAdd = this.handleBarAdd.bind(this);
+    this.handleBarRemove = this.handleBarRemove.bind(this);
   }
 
   handleSearch (searchText) {
@@ -63,6 +64,13 @@ class App extends React.Component {
       barAdded: newBarList
     })
   }
+  handleBarRemove(bar) {
+    var newBarList = this.state.barAdded;
+    newBarList.splice(bar.index, 1)
+    this.setState({
+      barAdded: newBarList
+    })
+  }
 
   render() {
     return (
@@ -76,7 +84,7 @@ class App extends React.Component {
           <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />
         </div>
         <div>
-          <CrawlEntryList barAdded={this.state.barAdded} />
+          <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} />
         </div>
         <div>
         </div>
