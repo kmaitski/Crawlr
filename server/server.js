@@ -22,7 +22,7 @@ server.get('/Crawl', function(req, res) {
 server.post('/Search', (req, res) => {
   let location = req.body.location;
   location = location.replace(/\s/g, '+');
-  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyCDKWpDcmNdporMyWf-4gLaf2X75zGFdnE';
+  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyDhuU0KKMkhLvfiVxwLkcaUfKsweSB3LtU';
   let options = {
     url: newUrl,
     headers: {
