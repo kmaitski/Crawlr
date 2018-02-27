@@ -57,7 +57,6 @@ class App extends React.Component {
   }
   handleSearchItemAdd() {}
   handleBarAdd(bar) {
-    console.log('good job u clicked it')
     var newBarList = this.state.barAdded;
     newBarList.push(bar);
     this.setState({
