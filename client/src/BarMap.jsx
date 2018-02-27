@@ -9,13 +9,11 @@ class BarMap extends React.Component {
       selected: {}
     };
     // console.log(this.props);
-    console.log(Google);
     this.handleWindowClick = this.handleWindowClick.bind(this);
     this.loadMap();
   }
 
-  handleWindowClick(bar) {
-    console.log('info window clicked')
+  handleWindowClick() {
     this.props.addbar(this.state.selected);
   }
 
@@ -49,7 +47,6 @@ class BarMap extends React.Component {
         <h1>${bar.name}</h1>
         <p>${bar.formatted_address}</p>
         <p>Rating: ${bar.rating}</p>
-
         <p>Double click pin to add to crawl </p>
         </div>`
         const info = new google.maps.InfoWindow({
@@ -61,12 +58,16 @@ class BarMap extends React.Component {
           title: bar.name,
         });
         marker.addListener('click', function() {
+          if(barmap.state.info) {
+            barmap.state.info.close();
+          }
           barmap.setState({
-            selected: bar
+            selected: bar,
+            info: info
           })
           info.open(map, marker);
         });
-        marker.addListener('dblclick', this.handleWindowClick);     
+        marker.addListener('dblclick', this.handleWindowClick);
       })
     }
   }
