@@ -15,25 +15,29 @@ class Search extends React.Component {
       searchText: e.target.value
     });
   }
-  submitClick() {
+  submitClick(e) {
+    // e.stopPropagation();
+    // e.nativeEvent.stopImmediatePropagation();
     console.log(this.props);
     console.log('hit submitclick in search.jsx');
     this.props.onSubmit(this.state.searchText)
+    e.preventDefault();
   }
 
   render() {
     return (
       <div>
-        <input
-        className="input"
-        type = "text"
-        value={this.state.searchText}
-        onChange={this.handleInputChange}
-        placeholder="Enter city... "
-        />
-        <button onClick={this.submitClick}>
-        Search
-        </button>
+        <form onSubmit={(e) => {this.submitClick(e)}}>
+          <input
+          className="input"
+          type = "text"
+          value={this.state.searchText}
+          onChange={this.handleInputChange}
+          placeholder="Enter city... "
+          />
+          <input type="submit" value="search">
+          </input>
+        </form>
       </div>
     )
   }
