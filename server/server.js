@@ -64,13 +64,15 @@ server.post('/Search', (req, res) => {
       }
     }
     request(otherOptions, (err, response, body) => {
-      let location = JSON.parse(body);
-      let coordinates = location.results[0].geometry.location;
-      let coordinatesAndBars = {
-        barList: bars,
-        coor: coordinates
-      };
-      console.log(coordinatesAndBars);
+      if (body) {
+        let location = JSON.parse(body);
+        let coordinates = location.results[0].geometry.location;
+        let coordinatesAndBars = {
+          barList: bars,
+          coor: coordinates
+        };
+        console.log(coordinatesAndBars);
+      }
       res.send(coordinatesAndBars);
     })
   });
