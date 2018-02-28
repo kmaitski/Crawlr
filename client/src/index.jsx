@@ -64,9 +64,9 @@ class App extends React.Component {
       barAdded: newBarList
     })
   }
-  handleBarRemove(bar) {
+  handleBarRemove(e) {
     var newBarList = this.state.barAdded;
-    newBarList.splice(bar.index, 1)
+    newBarList.splice(e.target.name, 1)
     this.setState({
       barAdded: newBarList
     })
