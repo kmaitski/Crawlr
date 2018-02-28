@@ -92,9 +92,9 @@ class App extends React.Component {
     })
   }
   handleButtonClick(e) {
-    console.log('hit menu click e is', e.target.name)
+    console.log('hit menu click e is', e.target.parentNode.name)
     this.setState({
-      activeItem: e.target.name
+      activeItem: e.target.parentNode.name
     })
   }
   handleUserCreation(e) {
@@ -130,6 +130,7 @@ class App extends React.Component {
           <Grid.Column width={9}>
           </Grid.Column>
           <Grid.Column width={3}>
+              <h3>Account</h3>
               <button
                 className="ui animated button"
                 role="button"
