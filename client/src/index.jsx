@@ -178,11 +178,11 @@ class App extends React.Component {
         {this.state.activeItem === 'create' &&
         <Grid celled>
         <Grid.Row>
-          <Grid.Column width={5}>
+          <Grid.Column width={7}>
           <h3>First, enter your city of choice!</h3>
           <Search onSubmit={this.handleSearch}/>
           </Grid.Column>
-          <Grid.Column width={7}>
+          <Grid.Column width={5}>
 
         </Grid.Column>
         </Grid.Row>
