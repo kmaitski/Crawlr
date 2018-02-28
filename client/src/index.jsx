@@ -49,6 +49,7 @@ class App extends React.Component {
     this.handleBarAdd = this.handleBarAdd.bind(this);
     this.handleBarRemove = this.handleBarRemove.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleUserCreation = this.handleUserCreation.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
   }
@@ -90,6 +91,12 @@ class App extends React.Component {
       activeItem: name
     })
   }
+  handleButtonClick(e) {
+    console.log('hit menu click e is', e.target.name)
+    this.setState({
+      activeItem: e.target.name
+    })
+  }
   handleUserCreation(e) {
     e.preventDefault();
     const username = $(".username").val();
@@ -123,23 +130,26 @@ class App extends React.Component {
           <Grid.Column width={9}>
           </Grid.Column>
           <Grid.Column width={3}>
-            <Menu>
-              <Menu.Item
-              width = {2}
-              name='login'
-              active={this.state.activeItem === 'login'}
-              onClick={this.handleMenuClick}
-              >
-              Log In
-              </Menu.Item>
-              <Menu.Item
-              name='signup'
-              active={this.state.activeItem === 'signup'}
-              onClick={this.handleMenuClick}
-              >
-              Sign Up
-              </Menu.Item>
-            </Menu>
+              <button
+                className="ui animated button"
+                role="button"
+                name="login"
+                onClick={this.handleButtonClick}>
+                <div className="visible content">
+                  <i aria-hidden="true" className="user profile icon"></i>
+                </div>
+                <div className="hidden content">Log In</div>
+              </button>
+              <button
+                className="ui animated button"
+                role="button"
+                name="signup"
+                onClick={this.handleButtonClick}>
+                <div className="visible content">
+                  <i aria-hidden="true" className="user add icon"></i>
+                </div>
+                <div className="hidden content">Sign Up!</div>
+              </button>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
