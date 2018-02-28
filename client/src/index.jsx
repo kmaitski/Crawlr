@@ -23,6 +23,7 @@ import MapView from './MapView.jsx';
 import CrawlEntryList from './CrawlEntryList.jsx';
 import SearchList from './SearchList.jsx';
 import MapContainer from './MapContainer.jsx'
+import DirectionsMap from './DirectionsMap.jsx'
 import $ from 'jquery';
 
 // let intialBars =
@@ -86,8 +87,12 @@ class App extends React.Component {
         <div>
           <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} />
         </div>
-        <div>
-        </div>
+        {this.state.barAdded.length > 3 &&
+          <div>
+            <h2>Here is your route!</h2>
+            <DirectionsMap crawlBars={this.state.barAdded} />
+          </div>
+        }
       </div>
     )
   }
