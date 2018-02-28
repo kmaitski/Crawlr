@@ -74,8 +74,8 @@ class BarMap extends React.Component {
 
   render() {
     const style = {
-      width: '75vw',
-      height: '75vh',
+      width: '46vw',
+      height: '46vh',
       display: 'inline-block'
     }
     return (
