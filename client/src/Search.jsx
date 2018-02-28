@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Input } from 'semantic-ui-react';
 
 class Search extends React.Component {
   constructor(props) {
@@ -28,15 +29,15 @@ class Search extends React.Component {
     return (
       <div>
         <form onSubmit={(e) => {this.submitClick(e)}}>
-          <input
+          <Input
           className="input"
           type = "text"
           value={this.state.searchText}
           onChange={this.handleInputChange}
           placeholder="Enter city... "
           />
-          <input type="submit" value="search">
-          </input>
+          <Input type="submit" icon="search" value = "Search">
+          </Input>
         </form>
       </div>
     )

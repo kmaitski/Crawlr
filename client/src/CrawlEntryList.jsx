@@ -1,16 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import CrawlEntry from './CrawlEntry.jsx';
+import { items } from 'semantic-ui-react';
 
 const CrawlEntryList = (props) => {
 return (
-    <div className="crawl-list">
-    <h2>Crawl Editor</h2>
-    <ul>
+    <div>
+    <h2>Bar List</h2>
+    <div class="ui items">
       {props.barAdded.map(function(bar, index) {
       return <CrawlEntry removebar={props.removebar} key={index} index={index} bar={bar}/>
       })}
-    </ul>
+    </div>
+    <h5>Click 'x' to remove</h5>
     </div>
 )
 };
