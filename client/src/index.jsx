@@ -24,6 +24,8 @@ import CrawlEntryList from './CrawlEntryList.jsx';
 import SearchList from './SearchList.jsx';
 import MapContainer from './MapContainer.jsx';
 import DirectionsMap from './DirectionsMap.jsx';
+import LoginView from "./LoginView.jsx"
+import SignupView from "./SignupView.jsx"
 import $ from 'jquery';
 import { Grid, Menu } from 'semantic-ui-react';
 import LandingPage from './LandingPage.jsx';
@@ -47,6 +49,8 @@ class App extends React.Component {
     this.handleBarAdd = this.handleBarAdd.bind(this);
     this.handleBarRemove = this.handleBarRemove.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleUserCreation = this.handleUserCreation.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
   }
 
   handleSearch (searchText) {
@@ -86,6 +90,25 @@ class App extends React.Component {
       activeItem: name
     })
   }
+  handleUserCreation(e) {
+    e.preventDefault();
+    const username = $(".username").val();
+    const password = $(".password").val();
+    console.log('user ' + username + ' created')
+    this.setState({
+      activeItem: 'home'
+    })
+  }
+
+  handleAuth(e) {
+    e.preventDefault();
+    const username = $(".username").val();
+    const password = $(".password").val();
+    console.log('Welcome, ' + username)
+    this.setState({
+      activeItem: 'home'
+    })
+  }
 
   render() {
     const { activeItem } = this.state.activeItem
@@ -93,13 +116,30 @@ class App extends React.Component {
       <div>
       <Grid celled>
         <Grid.Row>
+          <Grid.Column width={4}>
+            <h1>Crawlr</h1>
+            <h3>A Pub Crawl Creator</h3>
+          </Grid.Column>
+          <Grid.Column width={9}>
+          </Grid.Column>
           <Grid.Column width={3}>
-            <h1>Crawlr: A Pub Crawl Creator</h1>
-          </Grid.Column>
-          <Grid.Column width={12}>
-          </Grid.Column>
-          <Grid.Column width={1}>
-            <h5>Login</h5>
+            <Menu>
+              <Menu.Item
+              width = {2}
+              name='login'
+              active={this.state.activeItem === 'login'}
+              onClick={this.handleMenuClick}
+              >
+              Log In
+              </Menu.Item>
+              <Menu.Item
+              name='signup'
+              active={this.state.activeItem === 'signup'}
+              onClick={this.handleMenuClick}
+              >
+              Sign Up
+              </Menu.Item>
+            </Menu>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -129,14 +169,20 @@ class App extends React.Component {
           </Menu>
           </Grid.Column>
         </Grid.Row>
+        {this.state.activeItem == 'login' &&
+        <LoginView submit={this.handleAuth} />
+        }
+        {this.state.activeItem == 'signup' &&
+        <SignupView submit={this.handleUserCreation} />
+        }
         {this.state.activeItem === 'create' &&
         <Grid celled>
         <Grid.Row>
-          <Grid.Column width={5}>
+          <Grid.Column width={7}>
           <h3>First, enter your city of choice!</h3>
           <Search onSubmit={this.handleSearch}/>
           </Grid.Column>
-          <Grid.Column width={7}>
+          <Grid.Column width={5}>
 
         </Grid.Column>
         </Grid.Row>

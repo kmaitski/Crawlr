@@ -8,7 +8,7 @@ return (
     <div>
       <h1>Your Crawl</h1>
       <h2>Bar List</h2>
-      <div class="ui items">
+      <div className="ui items">
         {props.barAdded.map(function(bar, index) {
         return <CrawlEntry removebar={props.removebar} key={index} index={index} bar={bar}/>
         })}
