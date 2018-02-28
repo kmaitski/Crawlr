@@ -26,6 +26,7 @@ import MapContainer from './MapContainer.jsx';
 import DirectionsMap from './DirectionsMap.jsx';
 import $ from 'jquery';
 import { Grid, Menu } from 'semantic-ui-react';
+import LandingPage from './LandingPage.jsx';
 
 // let intialBars =
 
@@ -38,7 +39,9 @@ class App extends React.Component {
       searchValue: '',
       barList: [],
       location: {lat: 30.2672, lng: -97.7431},
-      activeItem: 'home'
+      activeItem: 'home',
+      landingPageView: true,
+      crawlListView: false
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleBarAdd = this.handleBarAdd.bind(this);
@@ -56,7 +59,8 @@ class App extends React.Component {
 
       this.setState({
         barList: data.barList,
-        location: data.coor
+        location: data.coor,
+        landingPageView: false
       });
     });
   }
@@ -65,7 +69,8 @@ class App extends React.Component {
     var newBarList = this.state.barAdded;
     newBarList.push(bar);
     this.setState({
-      barAdded: newBarList
+      barAdded: newBarList,
+      crawlListView: true
     })
   }
   handleBarRemove(e) {
@@ -137,18 +142,11 @@ class App extends React.Component {
         </Grid.Row>
         <Grid.Row>
         <Grid.Column width={11}>
-          <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />
+          {this.state.landingPageView ? <LandingPage /> : <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />}
         </Grid.Column>
         <Grid.Column width={5}>
-        <h1>Your Crawl</h1>
-        {this.state.barAdded.length === 0 &&
-          <div>
-            <h3>Double click marker to add bar</h3>
-          </div>
-        }
-        {this.state.barAdded.length > 0 &&
-          <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} />
-        }
+          {!this.state.landingPageView && !this.state.crawlListView && <div><h4>Then double click on the marker to start adding bars to your crawl!</h4></div>}
+          {this.state.crawlListView && <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} />}
         </Grid.Column>
         </Grid.Row>
         </Grid>
