@@ -3,6 +3,23 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const $ = require('jquery');
 const request = require('request');
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 var server = express();
 var port = process.env.PORT || 1337;
@@ -18,6 +35,12 @@ server.listen(port, function() {
 server.get('/Crawl', function(req, res) {
   res.send('ayy');
 });
+
+server.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/',
+                                   failureFlash: true })
+);
 
 server.post('/Search', (req, res) => {
   let location = req.body.location;
