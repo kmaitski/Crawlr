@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 
 const CrawlEntry = (props) => (
-  <ul key={props.bar.id} className="bar-entry"><a name={props.index} onClick={props.removebar}> x </a> {props.bar.name}</ul>
+  <div class="item" key={props.bar.id} ><a name={props.index} onClick={props.removebar}> x </a> {props.bar.name}</div>
 );
 
 export default CrawlEntry;

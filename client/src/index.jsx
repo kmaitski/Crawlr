@@ -124,12 +124,15 @@ class App extends React.Component {
           </Menu>
           </Grid.Column>
         </Grid.Row>
+        {this.state.activeItem === 'create' &&
+        <Grid celled>
         <Grid.Row>
           <Grid.Column width={5}>
+          <h3>First, enter your city of choice!</h3>
           <Search onSubmit={this.handleSearch}/>
           </Grid.Column>
           <Grid.Column width={7}>
-        <h2>First, enter your city of choice!</h2>
+
         </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -137,12 +140,23 @@ class App extends React.Component {
           <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />
         </Grid.Column>
         <Grid.Column width={5}>
+        <h1>Your Crawl</h1>
+        {this.state.barAdded.length === 0 &&
+          <div>
+            <h3>Double click marker to add bar</h3>
+          </div>
+        }
+        {this.state.barAdded.length > 0 &&
           <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} />
+        }
         </Grid.Column>
         </Grid.Row>
-        {this.state.barAdded.length > 3 &&
+        </Grid>
+      }
+        {this.state.barAdded.length >= 3 &&
           <div>
-            <h2>Here is your route!</h2>
+            <h1>Here is your route!</h1>
+            <h4>Click 'more options' for details</h4>
             <DirectionsMap crawlBars={this.state.barAdded} />
           </div>
         }
