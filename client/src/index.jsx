@@ -94,9 +94,9 @@ class App extends React.Component {
     })
   }
   handleButtonClick(e) {
-    console.log('hit menu click e is', e.target.parentNode.name)
+    console.log('hit menu click e is', e.target.parentNode.name);
     this.setState({
-      activeItem: e.target.parentNode.name
+      activeItem: e.target.parentNode.name || "home"
     })
   }
   handleUserCreation(e) {
@@ -148,20 +148,20 @@ class App extends React.Component {
                 role="button"
                 name="login"
                 onClick={this.handleButtonClick}>
-                <div className="visible content">
+                <div name="login" className="visible content">
                   <i aria-hidden="true" className="user profile icon"></i>
                 </div>
-                <div className="hidden content">Log In</div>
+                <div name="login" className="hidden content">Log In</div>
               </button>
               <button
                 className="ui animated button"
                 role="button"
                 name="signup"
                 onClick={this.handleButtonClick}>
-                <div className="visible content">
-                  <i aria-hidden="true" className="user add icon"></i>
+                <div name="signup" className="visible content">
+                  <i aria-hidden="true" name="signup" className="user add icon"></i>
                 </div>
-                <div className="hidden content">Sign Up!</div>
+                <div name="signup" className="hidden content">Sign Up!</div>
               </button>
           </Grid.Column>
         </Grid.Row>
