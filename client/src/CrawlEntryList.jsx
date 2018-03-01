@@ -20,6 +20,11 @@ return (
               />
         })}
       </div>
+      {props.barAdded.length > 5 &&
+         <h5>
+        Max bars reached
+        </h5>
+      }
       {props.barAdded.length > 2 &&
       <button
         className="ui button"

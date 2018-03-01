@@ -16,6 +16,7 @@ class MapContainer extends React.Component {
       <div>
       <BarMap
       addbar={this.props.addbar}
+      baradded={this.props.baradded}
       barlist={this.props.barlist}
       location={this.props.location}
       google={this.props.google} />

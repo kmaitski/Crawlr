@@ -21,7 +21,7 @@ class BarMap extends React.Component {
     if (prevProps.google !== this.props.google) {
       this.loadMap();
     }
-    if(prevProps.location !== this.props.location) {
+    if (prevProps.location !== this.props.location) {
       this.loadMap();
     }
   }
@@ -67,7 +67,11 @@ class BarMap extends React.Component {
           })
           info.open(map, marker);
         });
-        marker.addListener('dblclick', this.handleWindowClick);
+        marker.addListener('dblclick', function(){
+          if(barmap.props.baradded.length < 6) {
+            barmap.handleWindowClick()
+          };
+        });
       })
     }
   }

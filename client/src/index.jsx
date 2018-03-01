@@ -56,6 +56,7 @@ class App extends React.Component {
     this.handleAuth = this.handleAuth.bind(this);
     this.createCrawl = this.createCrawl.bind(this);
     this.saveCrawl = this.saveCrawl.bind(this);
+    this.cancelCrawl = this.cancelCrawl.bind(this);
   }
 
   handleSearch (searchText) {
@@ -67,7 +68,7 @@ class App extends React.Component {
     $.post('/Search', location, (data) => {
 
       this.setState({
-        barList: data.barList,
+        barList: data.barList || [],
         location: data.coor,
         landingPageView: false
       });
@@ -133,7 +134,12 @@ class App extends React.Component {
     const crawlname = $("#crawl-name").val();
     const crawldesc = $("#crawl-description").val();
     console.log('crawl saved. Name: ' + crawlname + ' Bar List: ' + this.state.barAdded)
-    $.post('/create', this.state.barAdded, () => {
+    const crawl = {
+      name: crawlname,
+      description: crawldesc,
+      bars: this.state.barAdded
+    }
+    $.post('/create', crawl, () => {
       console.log(success);
     });
     this.setState({
@@ -143,6 +149,13 @@ class App extends React.Component {
       activeItem: "home",
       landingPageView: true,
       directionMapView: false
+    })
+  }
+
+  cancelCrawl() {
+    this.setState({
+      directionMapView: false,
+      crawlListView: true
     })
   }
 
@@ -229,13 +242,13 @@ class App extends React.Component {
         <Grid.Row>
         <Grid.Column width={11}>
           {this.state.landingPageView && <LandingPage />}
-          {!this.state.directionMapView && !this.state.landingPageView && <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />}
+          {!this.state.directionMapView && !this.state.landingPageView && <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} baradded={this.state.barAdded} location={this.state.location} />}
           {this.state.directionMapView && <DirectionsMap crawlBars={this.state.barAdded} />}
         </Grid.Column>
         <Grid.Column width={5}>
-          {!this.state.landingPageView && !this.state.directionMapView && !this.state.crawlListView && <div><h4>Double click on a marker to start adding bars to your crawl!</h4></div>}
+          {!this.state.landingPageView && !this.state.directionMapView && !this.state.crawlListView && !this.state.barAdded.length && <div><h4>Double click on a marker to start adding bars to your crawl!</h4></div>}
           {this.state.crawlListView && <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} createCrawl={this.createCrawl} />}
-          {this.state.directionMapView && <CrawlCreateForm barAdded={this.state.barAdded} savecrawl={this.saveCrawl} />}
+          {this.state.directionMapView && <CrawlCreateForm barAdded={this.state.barAdded} cancelcrawl={this.cancelCrawl} savecrawl={this.saveCrawl} />}
         </Grid.Column>
         </Grid.Row>
         </Grid>
