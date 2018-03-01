@@ -40,15 +40,7 @@ class App extends React.Component {
 
       barAdded: [],
       searchValue: '',
-      barList: [{ formatted_address: 'South Korea, 부산광역시 해운대구 우동 1435 오렌지 프라자',
-       geometry: [Object],
-       icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png',
-       id: 'f3496f0d35dbfbd681bae8bb3ebc4b39c9443995',
-       name: 'Busan Marine City Goguryeo',
-       opening_hours: [Object],
-       photos: [Array],
-       place_id: 'ChIJkwubeK-SaDURbW23nriig2M',
-       rating: 5,}],
+      barList: [],
       location: {lat: 30.2672, lng: -97.7431},
       activeItem: 'home',
       landingPageView: true,
@@ -142,7 +134,12 @@ class App extends React.Component {
     const crawlname = $("#crawl-name").val();
     const crawldesc = $("#crawl-description").val();
     console.log('crawl saved. Name: ' + crawlname + ' Bar List: ' + this.state.barAdded)
-    $.post('/create', this.state.barAdded, () => {
+    const crawl = {
+      name: crawlname,
+      description: crawldesc,
+      bars: this.state.barAdded
+    }
+    $.post('/create', crawl, () => {
       console.log(success);
     });
     this.setState({
