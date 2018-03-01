@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CrawlEntry from './CrawlEntry.jsx';
-import { items } from 'semantic-ui-react';
 
 const CrawlEntryList = (props) => {
 return (
     <div>
-      <h1>Your Crawl</h1>
-      <h2>Bar List</h2>
+      <h2 className="ui header">
+      <i aria-hidden="true" className="beer icon"></i>
+      <div className="content">Your Crawl</div>
+      </h2>
+      <h4>Bar List</h4>
       <div className="ui items">
         {props.barAdded.map(function(bar, index) {
         return <CrawlEntry
@@ -25,7 +27,7 @@ return (
         type="submit"
         onClick={props.createCrawl}
       >
-        Create Your Crawl!
+        Map Your Crawl!
       </button>
       }
       {props.barAdded.length < 3 &&
