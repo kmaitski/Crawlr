@@ -18,7 +18,12 @@ class BarMap extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.loadMap();
+    if (prevProps.google !== this.props.google) {
+      this.loadMap();
+    }
+    if(prevProps.location !== this.props.location) {
+      this.loadMap();
+    }
   }
 
   loadMap() {
