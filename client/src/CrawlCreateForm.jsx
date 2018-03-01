@@ -8,6 +8,7 @@ return (
       <h2 className="ui header">
       <i aria-hidden="true" className="beer icon"></i>
       <div className="content">Your Crawl</div>
+      <button className="ui mini black button" onClick={props.cancelcrawl}>Back</button>
       </h2>
       <h4>Crawl Name</h4>
       <div className="ui input">
@@ -15,8 +16,11 @@ return (
       </div>
       <h4>Bar List</h4>
       <div className="ui items">
-        {props.barAdded.map(function(bar) {
-        return (<li key={bar.id}>{bar.name}</li>)
+        {props.barAdded.map(function(bar, index) {
+        return (<div key={bar.id}>
+                  <li>{bar.name}</li>
+                Arrival time: <input id={"bar"+index} type="time"/>
+                </div>)
         })}
       </div>
       <h4>Crawl Description</h4>
