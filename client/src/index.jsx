@@ -21,6 +21,7 @@ import ReactDOM from 'react-dom';
 import Search from './Search.jsx';
 import MapView from './MapView.jsx';
 import CrawlEntryList from './CrawlEntryList.jsx';
+import CrawlCreateForm from './CrawlCreateForm.jsx'
 import SearchList from './SearchList.jsx';
 import MapContainer from './MapContainer.jsx';
 import DirectionsMap from './DirectionsMap.jsx';
@@ -54,6 +55,7 @@ class App extends React.Component {
     this.handleUserCreation = this.handleUserCreation.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
     this.createCrawl = this.createCrawl.bind(this);
+    this.saveCrawl = this.saveCrawl.bind(this);
   }
 
   handleSearch (searchText) {
@@ -71,7 +73,6 @@ class App extends React.Component {
       });
     });
   }
-  handleSearchItemAdd() {}
   handleBarAdd(bar) {
     var newBarList = this.state.barAdded;
     newBarList.push(bar);
@@ -122,11 +123,27 @@ class App extends React.Component {
   createCrawl() {
     console.log('post request sent');
     this.setState({
-      directionMapView: true
+      directionMapView: true,
+      crawlListView: false
     })
+  }
+
+  saveCrawl(e) {
+    e.preventDefault();
+    const crawlname = $("#crawl-name").val();
+    const crawldesc = $("#crawl-description").val();
+    console.log('crawl saved. Name: ' + crawlname + ' Bar List: ' + this.state.barAdded)
     $.post('/create', this.state.barAdded, () => {
       console.log(success);
     });
+    this.setState({
+      barAdded: [],
+      barList: [],
+      location: {},
+      activeItem: "home",
+      landingPageView: true,
+      directionMapView: false
+    })
   }
 
   render() {
@@ -216,8 +233,9 @@ class App extends React.Component {
           {this.state.directionMapView && <DirectionsMap crawlBars={this.state.barAdded} />}
         </Grid.Column>
         <Grid.Column width={5}>
-          {!this.state.landingPageView && !this.state.crawlListView && <div><h4>Then double click on the marker to start adding bars to your crawl!</h4></div>}
+          {!this.state.landingPageView && !this.state.directionMapView && !this.state.crawlListView && <div><h4>Double click on a marker to start adding bars to your crawl!</h4></div>}
           {this.state.crawlListView && <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} createCrawl={this.createCrawl} />}
+          {this.state.directionMapView && <CrawlCreateForm barAdded={this.state.barAdded} savecrawl={this.saveCrawl} />}
         </Grid.Column>
         </Grid.Row>
         </Grid>
