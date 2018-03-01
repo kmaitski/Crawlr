@@ -10,20 +10,15 @@ class BarMap extends React.Component {
     };
     // console.log(this.props);
     this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.loadMap();
   }
+
 
   handleWindowClick() {
     this.props.addbar(this.state.selected);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.google !== this.props.google) {
-      this.loadMap();
-    }
-    if(prevProps.location !== this.props.location) {
-      this.loadMap();
-    }
+    this.loadMap();
   }
 
   loadMap() {
