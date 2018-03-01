@@ -46,6 +46,7 @@ server.post('/Search', (req, res) => {
   let location = req.body.location;
   location = location.replace(/\s/g, '+');
   let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyDifvb7nh0LRlcETFOQMhFmIrStcxyS2N8';
+
   let options = {
     url: newUrl,
     headers: {
@@ -64,6 +65,7 @@ server.post('/Search', (req, res) => {
       }
     }
     request(otherOptions, (err, response, body) => {
+      let coordinatesAndBars = {};
       let location = JSON.parse(body);
       // if (location.results[0]) {
       let coordinates = location.results[0].geometry.location;

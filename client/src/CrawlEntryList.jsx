@@ -10,9 +10,20 @@ return (
       <h2>Bar List</h2>
       <div className="ui items">
         {props.barAdded.map(function(bar, index) {
-        return <CrawlEntry removebar={props.removebar} key={index} index={index} bar={bar}/>
+        return <CrawlEntry
+                removebar={props.removebar}
+                key={index}
+                index={index}
+                bar={bar}
+              />
         })}
       </div>
+      <button
+        type="submit"
+        onClick={props.createCrawl}
+      >
+        Create Your Crawl!
+      </button>
       <h5>Click 'x' to remove</h5>
     </div>
 )

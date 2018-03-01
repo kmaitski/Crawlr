@@ -43,7 +43,8 @@ class App extends React.Component {
       location: {lat: 30.2672, lng: -97.7431},
       activeItem: 'home',
       landingPageView: true,
-      crawlListView: false
+      crawlListView: false,
+      directionMapView: false
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleBarAdd = this.handleBarAdd.bind(this);
@@ -52,6 +53,7 @@ class App extends React.Component {
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleUserCreation = this.handleUserCreation.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
+    this.createCrawl = this.createCrawl.bind(this);
   }
 
   handleSearch (searchText) {
@@ -115,6 +117,16 @@ class App extends React.Component {
     this.setState({
       activeItem: 'home'
     })
+  }
+
+  createCrawl() {
+    console.log('post request sent');
+    this.setState({
+      directionMapView: true
+    })
+    $.post('/create', this.state.barAdded, () => {
+      console.log(success);
+    });
   }
 
   render() {
@@ -199,22 +211,17 @@ class App extends React.Component {
         </Grid.Row>
         <Grid.Row>
         <Grid.Column width={11}>
-          {this.state.landingPageView ? <LandingPage /> : <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />}
+          {this.state.landingPageView && <LandingPage />}
+          {!this.state.directionMapView && !this.state.landingPageView && <MapContainer addbar={this.handleBarAdd} barlist={this.state.barList} location={this.state.location} />}
+          {this.state.directionMapView && <DirectionsMap crawlBars={this.state.barAdded} />}
         </Grid.Column>
         <Grid.Column width={5}>
           {!this.state.landingPageView && !this.state.crawlListView && <div><h4>Then double click on the marker to start adding bars to your crawl!</h4></div>}
-          {this.state.crawlListView && <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} />}
+          {this.state.crawlListView && <CrawlEntryList removebar={this.handleBarRemove} barAdded={this.state.barAdded} createCrawl={this.createCrawl} />}
         </Grid.Column>
         </Grid.Row>
         </Grid>
       }
-        {this.state.barAdded.length >= 3 &&
-          <div>
-            <h1>Here is your route!</h1>
-            <h4>Click 'more options' for details</h4>
-            <DirectionsMap crawlBars={this.state.barAdded} />
-          </div>
-        }
       </Grid>
       </div>
     )
