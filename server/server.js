@@ -45,7 +45,7 @@ server.post('/login',
 server.post('/Search', (req, res) => {
   let location = req.body.location;
   location = location.replace(/\s/g, '+');
-  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&AIzaSyDRYMy016SwaS0bHOzUbMwZ3Sg6as_O4PU';
+  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyDifvb7nh0LRlcETFOQMhFmIrStcxyS2N8';
   let options = {
     url: newUrl,
     headers: {
@@ -56,7 +56,8 @@ server.post('/Search', (req, res) => {
     let bars = JSON.parse(body);
     bars = bars.results;
     console.log(bars);
-    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyDRYMy016SwaS0bHOzUbMwZ3Sg6as_O4PU';
+    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyDifvb7nh0LRlcETFOQMhFmIrStcxyS2N8';
+
     let otherOptions = {
       url: otherUrl,
       headers: {
@@ -66,15 +67,14 @@ server.post('/Search', (req, res) => {
     request(otherOptions, (err, response, body) => {
       let coordinatesAndBars = {};
       let location = JSON.parse(body);
-      if (location.results[0]) {
-        let coordinates = location.results[0].geometry.location;
-        coordinatesAndBars = {
-          barList: bars,
-          coor: coordinates
-        };
-      }
+      let coordinates = location.results[0].geometry.location;
+      let coordinatesAndBars = {
+        barList: bars,
+        coor: coordinates
+      };
       console.log(coordinatesAndBars);
       res.send(coordinatesAndBars);
+    // };
     })
   });
 })
