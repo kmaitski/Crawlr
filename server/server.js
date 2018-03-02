@@ -7,6 +7,7 @@ const $ = require('jquery');
 const request = require('request');
 const mongoose = require('mongoose');
 const db = require('./db/db.js');
+const saveCrawl = require('./db/db.js').saveCrawl;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FaceBookStrategy = require('passport-facebook').Strategy;
@@ -27,8 +28,8 @@ server.use(passport.session());
 server.use(flash());
 
 server.use(express.static(__dirname + '/../client/public'));
-server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
+server.use(bodyParser.json());
 
 server.listen(port, function() {
   console.log('Listening on port ' + port);
@@ -36,6 +37,12 @@ server.listen(port, function() {
 
 server.get('/Crawl', function(req, res) {
   res.send('ayy');
+});
+
+server.post('/create', function(req, res) {
+  //console.log(req.body);
+  saveCrawl(req.body);
+  res.end();
 });
 
 server.get('/auth/facebook',

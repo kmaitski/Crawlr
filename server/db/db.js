@@ -24,8 +24,22 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-// var displayCats = function(cb) {
-//   Cat.find({}).exec(function (err, r) {
+var crawlSchema = mongoose.Schema({
+  name: String,
+  city: String,
+  description: String,
+  Date: String,
+  bars: Array,
+  rating: Number,
+  creator: String,
+  attendies: Array,
+  directions: String
+})
+
+var Crawl = mongoose.model('Crawl', crawlSchema);
+
+// var displayCrawls = function(cb) {
+//   Crawl.find({}).exec(function (err, r) {
 //     if (err) throw err;
 //     cb(r)
 //   })
@@ -40,7 +54,27 @@ var saveUser = function(data) {
   })
 };
 
+var saveCrawl = function(data) {
+  console.log('data in saveCrawl', data)
+  var newCrawl = {
+    name: data.name,
+    description: data.description,
+    bars: []
+  }
+  for (var i = 0; i<data.bars.length; i++) {
+    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating})
+  }
+
+  newCrawl = new Crawl(newCrawl);
+  newCrawl.save(function (err) {
+    if (err) {console.log(err)} else {
+    console.log('saved crawl!')
+  }
+  })
+};
+
 module.exports.saveUser = saveUser;
+module.exports.saveCrawl = saveCrawl;
 module.exports.db = db;
 module.exports.User = User;
-// module.exports.displayCats = displayCats;
+module.exports.Crawl = Crawl;

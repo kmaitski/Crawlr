@@ -170,9 +170,8 @@ handleFindSearch (searchText) {
       description: crawldesc,
       bars: this.state.barAdded
     }
-    $.post('/create', crawl, () => {
-      console.log(success);
-    });
+    console.log('crawl var is:', crawl);
+    $.post('/create', crawl)
     this.setState({
       barAdded: [],
       barList: [],
@@ -228,6 +227,9 @@ handleFindSearch (searchText) {
                 color='facebook'
                 href="/auth/facebook">
                 <Icon name='facebook' />
+              </Button>
+              <Button
+              href="/logout">Logout
               </Button>
           </Grid.Column>
         </Grid.Row>
