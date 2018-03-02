@@ -23,7 +23,7 @@ var getString = function(bars) {
 var mapStyle = {border: '0'};
 
 const DirectionsMap = (props) => {
-  var googleSrc = 'https://www.google.com/maps/embed/v1/directions?key=AIzaSyCueXDM32EEAr_cFN9VTWiCqZQSL4EeADs' + getString(props.crawlBars);
+  var googleSrc = 'https://www.google.com/maps/embed/v1/directions?key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc' + getString(props.crawlBars);
   return (
     <div className="directions-map">
       <iframe

@@ -30,6 +30,8 @@ import SignupView from "./SignupView.jsx"
 import $ from 'jquery';
 import { Grid, Menu } from 'semantic-ui-react';
 import LandingPage from './LandingPage.jsx';
+import FindPage from './FindPage.jsx';
+import HomePage from './HomePage.jsx';
 
 // let intialBars =
 
@@ -37,7 +39,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      topCrawlsList: [],
+      findSearch: '',
+      crawlList: [],
       barAdded: [],
       searchValue: '',
       barList: [],
@@ -57,6 +61,7 @@ class App extends React.Component {
     this.createCrawl = this.createCrawl.bind(this);
     this.saveCrawl = this.saveCrawl.bind(this);
     this.cancelCrawl = this.cancelCrawl.bind(this);
+    this.handleFindSearch = this.handleFindSearch.bind(this);
   }
 
   handleSearch (searchText) {
@@ -74,6 +79,21 @@ class App extends React.Component {
       });
     });
   }
+
+handleFindSearch (searchText) {
+    console.log('hit handlesearch in find.jsx, searchtext is:', searchText);
+    //set searchvalue state to search
+    this.setState({findSearch: searchText});
+    //do post request to server with search value
+    let location = {city: searchText}
+    $.post('/FindCrawls', location, (data) => {
+
+      this.setState({
+        crawlList: data.crawlList
+      });
+    });
+  }
+
   handleBarAdd(bar) {
     var newBarList = this.state.barAdded;
     newBarList.push(bar);
@@ -103,9 +123,11 @@ class App extends React.Component {
   }
   handleUserCreation(e) {
     e.preventDefault();
-    const username = $(".username").val();
-    const password = $(".password").val();
-    console.log('user ' + username + ' created')
+    const name = $(".username").val();
+    const pw = $(".password").val();
+    const newuser = {username: name, password: pw};
+    $.post('/signup', newuser, () =>
+    console.log('user ' + name + ' created'));
     this.setState({
       activeItem: 'home'
     })
@@ -228,6 +250,27 @@ class App extends React.Component {
         {this.state.activeItem == 'signup' &&
         <SignupView submit={this.handleUserCreation} />
         }
+
+
+        {this.state.activeItem === 'home' &&
+        <Grid celled>
+        <Grid.Row>
+        <HomePage onMenuClick={this.handleMenuClick} topCrawls={this.state.topCrawlsList}/>
+        </Grid.Row>
+        </Grid>
+        }
+
+
+        {this.state.activeItem === 'find' &&
+        <Grid celled>
+        <Grid.Row>
+        <FindPage onSubmit={this.handleFindSearch} crawls={this.state.crawlList}/>
+        </Grid.Row>
+        </Grid>
+        }
+
+
+
         {this.state.activeItem === 'create' &&
         <Grid celled>
         <Grid.Row>
