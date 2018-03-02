@@ -55,28 +55,36 @@ var saveUser = function(data) {
 };
 
 var saveCrawl = function(data) {
-  console.log('data in saveCrawl', data)
+  // console.log('data in saveCrawl', data)
+  console.log(data);
   var newCrawl = {
     name: data.name,
     description: data.description,
+    city: data.city,
     bars: []
   }
   for (var i = 0; i<data.bars.length; i++) {
-    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating})
+    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating});
   }
 
   newCrawl = new Crawl(newCrawl);
   newCrawl.save(function (err) {
     if (err) {console.log(err)} else {
-    console.log('saved crawl!')
-  }
-  })
+      // console.log(1);
+      // Crawl.find({}, (err, data) => {
+      //   console.log(data);
+      // });
+    console.log('saved crawl!');
+    }
+  });
 };
 
-exports.getCrawlsInCity = (location) => {
+exports.getCrawlsInCity = (location, cb) => {
+  console.log(location);
   Crawl.find({city: location}, (err, crawls) => {
     if (err) return console.log(err);
-    console.log(crawls);
+    // console.log(crawls);
+    cb(crawls);
   });
 }
 
