@@ -39,6 +39,27 @@ module.exports = function(passport) {
         }
       })
     })
-  }
-  ))
+  }))
+
+  passport.use('local-login', new LocalStrategy({
+    username: 'username',
+    password: 'password',
+    passReqToCallback: true
+  },
+  function(req, username, password, done) {
+    process.nextTick(function() {
+      User.findOne({'username': username}, function(err, user) {
+        if(err) {
+          return done(err);
+        }
+        if(!user) {
+          return done(null, false, console.log('loginMessage', 'no user found'))
+        }
+        if(user.password != password) {
+          return done(null, false, console.log('loginMessage', 'pw does not match'))
+        }
+        return done(null, user);
+      })
+    })
+  }))
 }

@@ -50,16 +50,25 @@ server.get('/auth/facebook/callback',
 server.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
   failureRedirect: '/',
-  failureFlash: true }));
-  // console.log(req.body);
-  // db.saveUser(req.body);
-  // res.end();
+  failureFlash: true
+}));
 
-// server.post('/login',
-//   passport.authenticate('local', { successRedirect: '/',
-//                                    failureRedirect: '/',
-//                                    failureFlash: true })
-// );
+server.post('/login', passport.authenticate('local-login', {
+  successRedirect:'/',
+  failureRedirect: '/',
+  failureFlash: true
+}));
+
+server.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/')
+});
+
+//RESTRICTED ACCESS UNTIL LOGGED IN EXAMPLE
+// app.get('/myCrawls', isLoggedIn function(req, res) {
+//   res.redirect('/myCrawls', {user: req.user})
+// });
+/////
 
 server.post('/Search', (req, res) => {
   let location = req.body.location;
@@ -105,3 +114,11 @@ server.post('/Crawl', function(req, res) {
 
   res.send(data);
 });
+
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/'); //should redirect to login page
+}

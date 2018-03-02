@@ -135,9 +135,11 @@ handleFindSearch (searchText) {
 
   handleAuth(e) {
     e.preventDefault();
-    const username = $(".username").val();
-    const password = $(".password").val();
-    console.log('Welcome, ' + username)
+    const name = $(".username").val();
+    const pw = $(".password").val();
+    const thisuser = {username: name, password: pw};
+    $.post('/login', thisuser, () =>
+    console.log('Welcome, ' + name));
     this.setState({
       activeItem: 'home'
     })
