@@ -193,80 +193,79 @@ handleFindSearch (searchText) {
     const { activeItem } = this.state.activeItem
     return (
       <div>
+       <Menu fixed="top" inverted>
+          <Menu.Item
+            color="yellow"
+            name='home'
+            active={this.state.activeItem === 'home'}
+            onClick={this.handleMenuClick}
+          >
+          Home
+          </Menu.Item>
+          <Menu.Item
+            name='find'
+            color="yellow"
+            active={this.state.activeItem === 'find'}
+            onClick={this.handleMenuClick}
+          >
+          Find a Crawl
+          </Menu.Item>
+          <Menu.Item
+            name='create'
+            color="yellow"
+            active={this.state.activeItem === 'create'}
+            onClick={this.handleMenuClick}
+          >
+          Create a Crawl
+          </Menu.Item>
+          <div className="right menu">
+          <button
+            className="ui animated button"
+            role="button"
+            name="login"
+            onClick={this.handleButtonClick}>
+            <div name="login" className="visible content">
+              <i aria-hidden="true" className="user profile icon"></i>
+            </div>
+            <div name="login" className="hidden content">Log In</div>
+          </button>
+          <Button
+            className="ui animated button"
+            color='facebook'
+            href="/auth/facebook">
+            <div className="visible content">
+              <Icon name='facebook' />
+            </div>
+            <div name="facebook" className="hidden content">FB Login</div>
+          </Button>
+          <button
+            className="ui animated button"
+            role="button"
+            name="signup"
+            onClick={this.handleButtonClick}>
+            <div name="signup" className="visible content">
+              <i aria-hidden="true" name="signup" className="user add icon"></i>
+            </div>
+            <div name="signup" className="hidden content">Sign Up!</div>
+          </button>
+          <Button
+          className="ui animated button">
+          <div className="visible content">
+            <Icon name="user close" />
+          </div>
+          <div className="hidden content" href="/logout">Logout</div>
+          </Button>
+          </div>
+        </Menu>
       <Grid celled>
         <Grid.Row>
           <Grid.Column width={4}>
-            <h1>Crawlr</h1>
-            <h3>A Pub Crawl Creator</h3>
+            <img src="./images/crawlrlogo.png"></img>
           </Grid.Column>
           <Grid.Column width={7}>
           </Grid.Column>
-          <Grid.Column width={5}>
-              <h4 className="ui center aligned header">Account</h4>
-              <button
-                className="ui animated button"
-                role="button"
-                name="login"
-                onClick={this.handleButtonClick}>
-                <div name="login" className="visible content">
-                  <i aria-hidden="true" className="user profile icon"></i>
-                </div>
-                <div name="login" className="hidden content">Log In</div>
-              </button>
-              <Button
-                className="ui animated button"
-                color='facebook'
-                href="/auth/facebook">
-                <div className="visible content">
-                  <Icon name='facebook' />
-                </div>
-                <div name="facebook" className="hidden content">FB Login</div>
-              </Button>
-              <button
-                className="ui animated button"
-                role="button"
-                name="signup"
-                onClick={this.handleButtonClick}>
-                <div name="signup" className="visible content">
-                  <i aria-hidden="true" name="signup" className="user add icon"></i>
-                </div>
-                <div name="signup" className="hidden content">Sign Up!</div>
-              </button>
-              <Button
-              className="ui animated button">
-              <div className="visible content">
-                <Icon name="user close" />
-              </div>
-              <div className="hidden content" href="/logout">Logout</div>
-              </Button>
-          </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column>
-          <Menu>
-            <Menu.Item
-              name='home'
-              active={this.state.activeItem === 'home'}
-              onClick={this.handleMenuClick}
-            >
-            Home
-            </Menu.Item>
-            <Menu.Item
-              name='find'
-              active={this.state.activeItem === 'find'}
-              onClick={this.handleMenuClick}
-            >
-            Find a Crawl
-            </Menu.Item>
-            <Menu.Item
-              name='create'
-              active={this.state.activeItem === 'create'}
-              onClick={this.handleMenuClick}
-            >
-            Create a Crawl
-            </Menu.Item>
-          </Menu>
-          </Grid.Column>
         </Grid.Row>
         {this.state.activeItem == 'login' &&
         <LoginView submit={this.handleAuth} />
@@ -274,8 +273,6 @@ handleFindSearch (searchText) {
         {this.state.activeItem == 'signup' &&
         <SignupView submit={this.handleUserCreation} />
         }
-
-
         {this.state.activeItem === 'home' &&
         <Grid celled>
         <Grid.Row>
@@ -283,8 +280,6 @@ handleFindSearch (searchText) {
         </Grid.Row>
         </Grid>
         }
-
-
         {this.state.activeItem === 'find' &&
         <Grid celled>
         <Grid.Row>
@@ -292,9 +287,6 @@ handleFindSearch (searchText) {
         </Grid.Row>
         </Grid>
         }
-
-
-
         {this.state.activeItem === 'create' &&
         <Grid celled>
         <Grid.Row>

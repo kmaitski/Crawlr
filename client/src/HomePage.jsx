@@ -15,7 +15,7 @@ const HomePage = (props) => (
       </Grid.Row>
       <Grid.Row length={2}>
       <Grid.Column width={8}>
-      <Button fluid name='find' primary onClick={props.onMenuClick}>Find a Crawl</Button>
+      <Button fluid name='find' secondary onClick={props.onMenuClick}>Find a Crawl</Button>
       </Grid.Column>
       <Grid.Column width={8}>
       <Button fluid name='create' secondary onClick={props.onMenuClick}>Create a Crawl</Button>
