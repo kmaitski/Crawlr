@@ -199,10 +199,10 @@ handleFindSearch (searchText) {
             <h1>Crawlr</h1>
             <h3>A Pub Crawl Creator</h3>
           </Grid.Column>
-          <Grid.Column width={9}>
+          <Grid.Column width={7}>
           </Grid.Column>
-          <Grid.Column width={3}>
-              <h3>Account</h3>
+          <Grid.Column width={5}>
+              <h4 className="ui center aligned header">Account</h4>
               <button
                 className="ui animated button"
                 role="button"
@@ -213,6 +213,15 @@ handleFindSearch (searchText) {
                 </div>
                 <div name="login" className="hidden content">Log In</div>
               </button>
+              <Button
+                className="ui animated button"
+                color='facebook'
+                href="/auth/facebook">
+                <div className="visible content">
+                  <Icon name='facebook' />
+                </div>
+                <div name="facebook" className="hidden content">FB Login</div>
+              </Button>
               <button
                 className="ui animated button"
                 role="button"
@@ -224,12 +233,11 @@ handleFindSearch (searchText) {
                 <div name="signup" className="hidden content">Sign Up!</div>
               </button>
               <Button
-                color='facebook'
-                href="/auth/facebook">
-                <Icon name='facebook' />
-              </Button>
-              <Button
-              href="/logout">Logout
+              className="ui animated button">
+              <div className="visible content">
+                <Icon name="user close" />
+              </div>
+              <div className="hidden content" href="/logout">Logout</div>
               </Button>
           </Grid.Column>
         </Grid.Row>
