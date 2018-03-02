@@ -73,6 +73,13 @@ var saveCrawl = function(data) {
   })
 };
 
+exports.getCrawlsInCity = (location) => {
+  Crawl.find({city: location}, (err, crawls) => {
+    if (err) return console.log(err);
+    console.log(crawls);
+  });
+}
+
 module.exports.saveUser = saveUser;
 module.exports.saveCrawl = saveCrawl;
 module.exports.db = db;

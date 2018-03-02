@@ -114,17 +114,23 @@ server.post('/Search', (req, res) => {
           coor: coordinates
         };
       }
-      console.log(coordinatesAndBars);
+      // console.log(coordinatesAndBars);
       res.send(coordinatesAndBars);
     // };
-    })
+    });
   });
+});
+
+server.post('/FindCrawls', (req, res) => {
+  // console.log(req.body)
+  db.getCrawlsInCity(req.body.city);
+  res.end();
 })
 
-server.post('/Crawl', function(req, res) {
+// server.post('/Crawl', function(req, res) {
 
-  res.send(data);
-});
+//   res.send(data);
+// });
 
 
 function isLoggedIn(req, res, next) {
