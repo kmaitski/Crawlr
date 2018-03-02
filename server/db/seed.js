@@ -3,7 +3,19 @@ mongoose.connect('mongodb://localhost/crawlr')
 
 var db = mongoose.connection;
 
-var userData = [{"username": "kevin", "password": "testpw"}]
+var userData = [
+{
+  local: {
+    "username": "kevin",
+    "password": "testpw"
+  },
+  facebook: {
+    "id": "fakeid",
+    "token": "faketoken",
+    "email": "fakeemail",
+    "name": "fakename"
+  }
+}];
 
 
 db.once('open', function() {
@@ -13,8 +25,16 @@ db.once('open', function() {
 // Step 2: Add data from `data.json`
 
 var userSchema = mongoose.Schema({
-  username: String,//{type: String, index: {unique: true}},
-  password: String
+  local: {
+    username: String, //{type: String, index: {unique: true}},
+    password: String
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String,
+  }
 })
 
 var User = mongoose.model('User', userSchema);

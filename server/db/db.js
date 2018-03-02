@@ -11,8 +11,16 @@ db.once('open', function() {
 });
 
 var userSchema = mongoose.Schema({
-  username: String, //{type: String, index: {unique: true}},
-  password: String
+  local: {
+    username: String, //{type: String, index: {unique: true}},
+    password: String
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  }
 })
 
 var User = mongoose.model('User', userSchema);

@@ -28,7 +28,7 @@ import DirectionsMap from './DirectionsMap.jsx';
 import LoginView from "./LoginView.jsx"
 import SignupView from "./SignupView.jsx"
 import $ from 'jquery';
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid, Menu, Button, Icon } from 'semantic-ui-react';
 import LandingPage from './LandingPage.jsx';
 import FindPage from './FindPage.jsx';
 import HomePage from './HomePage.jsx';
@@ -62,6 +62,7 @@ class App extends React.Component {
     this.saveCrawl = this.saveCrawl.bind(this);
     this.cancelCrawl = this.cancelCrawl.bind(this);
     this.handleFindSearch = this.handleFindSearch.bind(this);
+    this.handleFacebookClick = this.handleFacebookClick.bind(this);
   }
 
   handleSearch (searchText) {
@@ -115,6 +116,12 @@ handleFindSearch (searchText) {
       activeItem: name
     })
   }
+  handleFacebookClick(e) {
+    console.log('hit fb click e is', e.target.parentNode.name);
+    $.get('/auth/facebook', () => {
+      console.log('hit get in fb click');
+    })
+  };
   handleButtonClick(e) {
     console.log('hit menu click e is', e.target.parentNode.name);
     this.setState({
@@ -217,6 +224,11 @@ handleFindSearch (searchText) {
                 </div>
                 <div name="signup" className="hidden content">Sign Up!</div>
               </button>
+              <Button
+                color='facebook'
+                href="/auth/facebook">
+                <Icon name='facebook' />
+              </Button>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>

@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const db = require('./db/db.js');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FaceBookStrategy = require('passport-facebook').Strategy;
 const flash = require('connect-flash');
 require('../config/passport.js')(passport);
 
@@ -41,7 +42,10 @@ server.get('/auth/facebook',
   passport.authenticate('facebook'));
 
 server.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/'
+  }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
