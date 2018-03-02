@@ -12,7 +12,6 @@ var userData = [
   facebook: {
     "id": "fakeid",
     "token": "faketoken",
-    "email": "fakeemail",
     "name": "fakename"
   }
 }];
@@ -32,7 +31,6 @@ var userSchema = mongoose.Schema({
   facebook: {
     id: String,
     token: String,
-    email: String,
     name: String,
   }
 })
