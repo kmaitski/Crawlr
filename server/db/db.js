@@ -65,7 +65,7 @@ var saveCrawl = function(data) {
   }
   for (var i = 0; i<data.bars.length; i++) {
     console.log(data.bars[0].photos[0].photo_reference);
-    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[i].photos[0].photo_reference});
+    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[i].photos[0].photo_reference, formatted_address: data.bars[i].formatted_address});
   }
 
   newCrawl = new Crawl(newCrawl);
@@ -87,6 +87,10 @@ exports.getCrawlsInCity = (location, cb) => {
     // console.log(crawls);
     cb(crawls);
   });
+}
+
+exports.deleteDatabaseData = () => {
+  Crawl.remove().exec();
 }
 
 module.exports.saveUser = saveUser;

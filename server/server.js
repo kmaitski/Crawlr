@@ -128,6 +128,11 @@ server.post('/FindCrawls', (req, res) => {
     res.send(crawls);
   });
   // res.end();
+});
+
+server.get('/delete123', (req, res) => {
+  db.deleteDatabaseData();
+  res.end();
 })
 
 // server.post('/Crawl', function(req, res) {
