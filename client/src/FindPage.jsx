@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Input } from 'semantic-ui-react';
+import FindCrawlList from './FindCrawlList.jsx';
 
 class FindPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: ''
+      searchText: '',
+      entryView: false
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submitClick = this.submitClick.bind(this);
+    // console.log(this.props.crawls.length);
   }
   handleInputChange(e) {
     this.setState({
@@ -19,9 +22,10 @@ class FindPage extends React.Component {
   submitClick(e) {
     // e.stopPropagation();
     // e.nativeEvent.stopImmediatePropagation();
-    console.log(this.props);
-    console.log('hit submitclick in search.jsx');
-    this.props.onSubmit(this.state.searchText)
+    // console.log(this.props);
+    // console.log('hit submitclick in search.jsx');
+    this.props.onSubmit(this.state.searchText);
+    this.setState({entryView: true});
     e.preventDefault();
   }
 
@@ -39,6 +43,7 @@ class FindPage extends React.Component {
           <Input type="submit" icon="search" value = "Search">
           </Input>
         </form>
+        {this.state.entryView && <FindCrawlList crawlList={this.props.crawls}/>}
       </div>
     )
   }

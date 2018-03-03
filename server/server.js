@@ -96,7 +96,7 @@ server.post('/Search', (req, res) => {
   request(options, function(err, response, body) {
     let bars = JSON.parse(body);
     bars = bars.results;
-    console.log(bars);
+    // console.log(bars);
     let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc';
     let otherOptions = {
       url: otherUrl,
@@ -114,17 +114,26 @@ server.post('/Search', (req, res) => {
           coor: coordinates
         };
       }
-      console.log(coordinatesAndBars);
+      // console.log(coordinatesAndBars);
       res.send(coordinatesAndBars);
     // };
-    })
+    });
   });
+});
+
+server.post('/FindCrawls', (req, res) => {
+  // console.log(req.body)
+  db.getCrawlsInCity(req.body.city, crawls => {
+    // console.log(crawls);
+    res.send(crawls);
+  });
+  // res.end();
 })
 
-server.post('/Crawl', function(req, res) {
+// server.post('/Crawl', function(req, res) {
 
-  res.send(data);
-});
+//   res.send(data);
+// });
 
 
 function isLoggedIn(req, res, next) {

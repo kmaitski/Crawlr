@@ -49,7 +49,8 @@ class App extends React.Component {
       activeItem: 'home',
       landingPageView: true,
       crawlListView: false,
-      directionMapView: false
+      directionMapView: false,
+      city: ''
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleBarAdd = this.handleBarAdd.bind(this);
@@ -76,7 +77,8 @@ class App extends React.Component {
       this.setState({
         barList: data.barList || [],
         location: data.coor,
-        landingPageView: false
+        landingPageView: false,
+        city: searchText
       });
     });
   }
@@ -88,9 +90,9 @@ handleFindSearch (searchText) {
     //do post request to server with search value
     let location = {city: searchText}
     $.post('/FindCrawls', location, (data) => {
-
+      console.log("handleFindSearch data", data);
       this.setState({
-        crawlList: data.crawlList
+        crawlList: data
       });
     });
   }
@@ -101,7 +103,7 @@ handleFindSearch (searchText) {
     this.setState({
       barAdded: newBarList,
       crawlListView: true
-    })
+    });
   }
   handleBarRemove(e) {
     var newBarList = this.state.barAdded;
@@ -110,6 +112,7 @@ handleFindSearch (searchText) {
       barAdded: newBarList
     })
   }
+
   handleMenuClick(e, { name }) {
     console.log('hit menu click e is', name)
     this.setState({
@@ -164,11 +167,13 @@ handleFindSearch (searchText) {
     e.preventDefault();
     const crawlname = $("#crawl-name").val();
     const crawldesc = $("#crawl-description").val();
-    console.log('crawl saved. Name: ' + crawlname + ' Bar List: ' + this.state.barAdded)
+    // console.log('crawl saved. Name: ' + crawlname + ' Bar List: ' + this.state.barAdded)
+    console.log(this.state.city);
     const crawl = {
       name: crawlname,
       description: crawldesc,
-      bars: this.state.barAdded
+      bars: this.state.barAdded,
+      city: this.state.city
     }
     console.log('crawl var is:', crawl);
     $.post('/create', crawl)
