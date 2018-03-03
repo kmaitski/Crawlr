@@ -20,6 +20,7 @@ class FindPage extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submitClick = this.submitClick.bind(this);
     this.entryClick = this.entryClick.bind(this);
+    this.goBackToEntries = this.goBackToEntries.bind(this);
     // console.log(this.props.crawls.length);
   }
   handleInputChange(e) {
@@ -48,6 +49,14 @@ class FindPage extends React.Component {
     });
   }
 
+  goBackToEntries() {
+    console.log(1);
+    this.setState({
+      entryView: true,
+      directionView: false
+    });
+  }
+
   render() {
     return (
       <div>
@@ -70,7 +79,7 @@ class FindPage extends React.Component {
             {this.state.directionView && <DirectionsMap crawlBars={this.state.bars} />}
           </div>
           <div style={{paddingLeft: "200px"}}>
-            {this.state.directionView && <FindCrawlSingleEntry name={this.state.crawlName} bars={this.state.bars} description={this.state.description}/>}
+            {this.state.directionView && <FindCrawlSingleEntry name={this.state.crawlName} bars={this.state.bars} description={this.state.description} goBackToEntries={this.goBackToEntries} />}
           </div>
         </div>
       </div>

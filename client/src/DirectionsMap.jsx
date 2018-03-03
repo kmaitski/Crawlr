@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 var getString = function(bars) {
   var resultStr = '';
   var barsFixed = [];
+  let tempStr;
   for (var i = 0; i < bars.length; i++) {
-    let tempStr = bars[i].formatted_address;
+    tempStr = bars[i].formatted_address;
     tempStr = tempStr.replace(/\s/g, '+');
     tempStr = tempStr.replace(/,/g, '');
     barsFixed.push(tempStr)
