@@ -14,10 +14,11 @@ return (
       {props.crawl.bars[5] && <li>{props.crawl.bars[5].name}</li>}
     </ul>
     <p>{props.crawl.description}</p>
+    <img src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + props.crawl.bars[0].photo + '&sensor=false&maxheight=100&maxwidth=100&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'} />
+    <img src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + props.crawl.bars[2].photo + '&sensor=false&maxheight=100&maxwidth=100&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'} />
     <br/>
   </div>
 )
 }
 
 export default FindCrawlEntry;
-    // <img src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + props.crawl.bars[0].photo + '&sensor=false&maxheight=100&maxwidth=100&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'} />
