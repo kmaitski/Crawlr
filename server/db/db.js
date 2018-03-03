@@ -82,7 +82,7 @@ var saveCrawl = function(data) {
 
 exports.getCrawlsInCity = (location, cb) => {
   console.log(location);
-  Crawl.find({city: location}, (err, crawls) => {
+  Crawl.find({city: {$regex: new RegExp(location, "i")}}, (err, crawls) => {
     if (err) return console.log(err);
     // console.log(crawls);
     cb(crawls);
