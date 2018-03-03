@@ -5,12 +5,12 @@ const FindCrawlList = (props) => {
   console.log(props);
 return (
   <div>
-    <h2>
-      Here are the crawls in your city!
-    </h2>
-    {props.crawlList.map(crawl => {
-      return <FindCrawlEntry crawl={crawl}/>
-    })}
+    <h2>Here are the crawls in your city!</h2>
+      <div style={{display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: "10px", gridAutoRows: "minMax(100px, auto)"}}>
+        {props.crawlList.map((crawl, i) => {
+          return <FindCrawlEntry crawl={crawl} key={i}/>
+        })}
+      </div>
 
   </div>
 )
