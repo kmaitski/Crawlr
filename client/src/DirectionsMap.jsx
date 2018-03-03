@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 
 var getString = function(bars) {
   var resultStr = '';
@@ -23,7 +23,9 @@ var getString = function(bars) {
 var mapStyle = {border: '0'};
 
 const DirectionsMap = (props) => {
+  console.log(props);
   var googleSrc = 'https://www.google.com/maps/embed/v1/directions?key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc' + getString(props.crawlBars);
+  console.log(getString(props.crawlBars));
   return (
     <div className="directions-map">
       <iframe

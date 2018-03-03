@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/crawlr');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017');
 
 var db = mongoose.connection;
 
@@ -65,7 +65,7 @@ var saveCrawl = function(data) {
   }
   for (var i = 0; i<data.bars.length; i++) {
     console.log(data.bars[0].photos[0].photo_reference);
-    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[0].photos[0].photo_reference});
+    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[i].photos[0].photo_reference, formatted_address: data.bars[i].formatted_address});
   }
 
   newCrawl = new Crawl(newCrawl);
@@ -82,11 +82,15 @@ var saveCrawl = function(data) {
 
 exports.getCrawlsInCity = (location, cb) => {
   console.log(location);
-  Crawl.find({city: location}, (err, crawls) => {
+  Crawl.find({city: {$regex: new RegExp(location, "i")}}, (err, crawls) => {
     if (err) return console.log(err);
     // console.log(crawls);
     cb(crawls);
   });
+}
+
+exports.deleteDatabaseData = () => {
+  Crawl.remove().exec();
 }
 
 module.exports.saveUser = saveUser;
