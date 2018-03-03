@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/crawlr');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017');
 
 var db = mongoose.connection;
 
