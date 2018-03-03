@@ -56,7 +56,7 @@ var saveUser = function(data) {
 
 var saveCrawl = function(data) {
   // console.log('data in saveCrawl', data)
-  console.log(data);
+  // console.log(data);
   var newCrawl = {
     name: data.name,
     description: data.description,
@@ -64,7 +64,8 @@ var saveCrawl = function(data) {
     bars: []
   }
   for (var i = 0; i<data.bars.length; i++) {
-    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating});
+    console.log(data.bars[0].photos[0].photo_reference);
+    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[0].photos[0].photo_reference});
   }
 
   newCrawl = new Crawl(newCrawl);
