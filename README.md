@@ -1,4 +1,4 @@
-Project Name
+ Project Name
 Pithy project description
 
 Team
