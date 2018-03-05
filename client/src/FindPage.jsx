@@ -78,7 +78,7 @@ class FindPage extends React.Component {
           <div>
             {this.state.directionView && <DirectionsMap crawlBars={this.state.bars} />}
           </div>
-          <div style={{paddingLeft: "200px"}}>
+          <div style={{paddingLeft: "100px"}}>
             {this.state.directionView && <FindCrawlSingleEntry name={this.state.crawlName} bars={this.state.bars} description={this.state.description} goBackToEntries={this.goBackToEntries} />}
           </div>
         </div>
