@@ -97,7 +97,7 @@ server.post('/Search', (req, res) => {
     let bars = JSON.parse(body);
     bars = bars.results;
     // console.log(bars);
-    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc';
+    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4';
     let otherOptions = {
       url: otherUrl,
       headers: {
