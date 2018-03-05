@@ -126,9 +126,9 @@ handleFindSearch (searchText) {
     })
   };
   handleButtonClick(e) {
-    console.log('hit menu click e is', e.target.parentNode.name);
+    console.log('hit menu click e is', e.target.name);
     this.setState({
-      activeItem: e.target.parentNode.name || "home"
+      activeItem: e.target.name || "home"
     })
   }
   handleUserCreation(e) {
@@ -224,41 +224,20 @@ handleFindSearch (searchText) {
           Create a Crawl
           </Menu.Item>
           <div className="right menu">
-          <button
-            className="ui animated button"
+          <Button
             role="button"
             name="login"
             onClick={this.handleButtonClick}>
-            <div name="login" className="visible content">
-              <i aria-hidden="true" className="user profile icon"></i>
-            </div>
-            <div name="login" className="hidden content">Log In</div>
-          </button>
-          <Button
-            className="ui animated button"
-            color='facebook'
-            href="/auth/facebook">
-            <div className="visible content">
-              <Icon name='facebook' />
-            </div>
-            <div name="facebook" className="hidden content">FB Login</div>
+            Log In
           </Button>
-          <button
-            className="ui animated button"
+          <Button
             role="button"
             name="signup"
             onClick={this.handleButtonClick}>
-            <div name="signup" className="visible content">
-              <i aria-hidden="true" name="signup" className="user add icon"></i>
-            </div>
-            <div name="signup" className="hidden content">Sign Up!</div>
-          </button>
-          <Button
-          className="ui animated button">
-          <div className="visible content">
-            <Icon name="user close" />
-          </div>
-          <div className="hidden content" href="/logout">Logout</div>
+            Sign Up!
+          </Button>
+          <Button>
+          <div href="/logout">Log Out</div>
           </Button>
           </div>
         </Menu>
