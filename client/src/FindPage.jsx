@@ -11,7 +11,7 @@ class FindPage extends React.Component {
     super(props);
     this.state = {
       searchText: '',
-      entryView: false,
+      allView: true,
       directionView: false,
       bars: [],
       crawlName: '',
@@ -23,6 +23,13 @@ class FindPage extends React.Component {
     this.goBackToEntries = this.goBackToEntries.bind(this);
     // console.log(this.props.crawls.length);
   }
+
+  componentDidMount() {
+    // console.log('mounted');
+    this.props.getIntialCrawlList();
+  }
+
+
   handleInputChange(e) {
     this.setState({
       searchText: e.target.value
@@ -34,14 +41,14 @@ class FindPage extends React.Component {
     // console.log(this.props);
     // console.log('hit submitclick in search.jsx');
     this.props.onSubmit(this.state.searchText);
-    this.setState({entryView: true});
+    this.setState({allView: false});
+    // this.setState({entryView: true});
     e.preventDefault();
   }
 
   entryClick(state) {
     // console.log(state);
     this.setState({
-      entryView: false,
       directionView: true,
       bars: state.bars,
       crawlName: state.crawlName,
@@ -73,7 +80,9 @@ class FindPage extends React.Component {
         </form>
         <div style={{display:"flex", flexDirection:"row"}}>
           <div>
-            {this.state.entryView && !this.state.directionView && <FindCrawlList crawlList={this.props.crawls} entryClick={this.entryClick} />}
+            {this.state.allView && !this.state.directionView && <h1>Here are all the crawls!</h1>}
+            {!this.state.allView && !this.state.directionView && <h1>Here are the crawls in your city</h1>}
+            {!this.state.directionView && <FindCrawlList crawlList={this.props.crawls} entryClick={this.entryClick} />}
           </div>
           <div>
             {this.state.directionView && <DirectionsMap crawlBars={this.state.bars} />}
