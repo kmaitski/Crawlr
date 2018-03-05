@@ -85,7 +85,7 @@ server.post('/Search', (req, res) => {
   let location = req.body.location;
   location = location.replace(/\s/g, '+');
 
-  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc';
+  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4';
 
   let options = {
     url: newUrl,

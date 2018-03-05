@@ -19,7 +19,7 @@ class FindCrawlEntry extends React.Component {
       >
         <figure style={{width: "175px", height: "100%", float: "left"}}>
           <img
-            src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + this.props.crawl.bars[0].photo + '&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'}
+            src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + this.props.crawl.bars[0].photo + '&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4'}
           />
           <figcaption><em>{this.props.crawl.bars[0].name}</em></figcaption>
         </figure>

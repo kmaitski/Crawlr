@@ -24,7 +24,7 @@ var getString = function(bars) {
 var mapStyle = {border: '0'};
 const DirectionsMap = (props) => {
   console.log(props);
-  var googleSrc = '//www.google.com/maps/embed/v1/directions?key=AIzaSyD_H20O9JT992TpkItMVB7KwjvNskf_Azg' + getString(props.crawlBars);
+  var googleSrc = '//www.google.com/maps/embed/v1/directions?key=AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4' + getString(props.crawlBars);
   console.log(getString(props.crawlBars));
   return (
     <div className="directions-map">
