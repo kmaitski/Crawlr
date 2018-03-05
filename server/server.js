@@ -85,7 +85,7 @@ server.post('/Search', (req, res) => {
   let location = req.body.location;
   location = location.replace(/\s/g, '+');
 
-  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4';
+  let newUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=bars+in+' + location + '&key=AIzaSyBP-TMT17pPoumM2HHp1pRUie8DhaalyOw';
 
   let options = {
     url: newUrl,
@@ -96,28 +96,30 @@ server.post('/Search', (req, res) => {
   request(options, function(err, response, body) {
     let bars = JSON.parse(body);
     bars = bars.results;
-    // console.log(bars);
-    let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4';
-    let otherOptions = {
-      url: otherUrl,
-      headers: {
-        'User-Agent': 'request'
+    console.log(bars);
+    if (bars.length !== 0) {
+      let otherUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&AIzaSyAkRQG5OG1z4VNep44EcCu1wdsGUq3_6X4';
+      let otherOptions = {
+        url: otherUrl,
+        headers: {
+          'User-Agent': 'request'
+        }
       }
+      request(otherOptions, (err, response, body) => {
+        let coordinatesAndBars = {};
+        let location = JSON.parse(body);
+        if (location.results[0]) {
+          let coordinates = location.results[0].geometry.location;
+          coordinatesAndBars = {
+            barList: bars,
+            coor: coordinates
+          };
+        }
+        // console.log(coordinatesAndBars);
+        res.send(coordinatesAndBars);
+      // };
+      });
     }
-    request(otherOptions, (err, response, body) => {
-      let coordinatesAndBars = {};
-      let location = JSON.parse(body);
-      if (location.results[0]) {
-        let coordinates = location.results[0].geometry.location;
-        coordinatesAndBars = {
-          barList: bars,
-          coor: coordinates
-        };
-      }
-      // console.log(coordinatesAndBars);
-      res.send(coordinatesAndBars);
-    // };
-    });
   });
 });
 
