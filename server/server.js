@@ -133,7 +133,15 @@ server.post('/FindCrawls', (req, res) => {
 server.get('/delete123', (req, res) => {
   db.deleteDatabaseData();
   res.end();
-})
+});
+
+server.get('/all', (req, res) => {
+  // console.log('am I in the server')
+  db.getAll(crawls => {
+    console.log(crawls);
+    res.send(crawls);
+  });
+});
 
 // server.post('/Crawl', function(req, res) {
 
