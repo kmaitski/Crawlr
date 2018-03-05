@@ -17,10 +17,12 @@ class FindCrawlEntry extends React.Component {
         style={{border: "solid", overflow: "hidden", padding: "10px"}}
         onClick={() => {this.props.entryClick(this.state)}}
       >
-        <img
-          style={{width: "175px", height: "175px", float: "left"}}
-          src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + this.props.crawl.bars[0].photo + '&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'}
-        />
+        <figure style={{width: "175px", height: "175px", float: "left"}}>
+          <img
+            src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + this.props.crawl.bars[0].photo + '&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'}
+          />
+          <figcaption><em>{this.props.crawl.bars[0].name}</em></figcaption>
+        </figure>
         <h4 style={{textAlign: "center", fontSize: "30px"}}>{this.props.crawl.name}</h4>
         <ul style={{textAlign: "center", listStyleType: "none"}}>
           <li>{this.props.crawl.bars[0].name}</li>
