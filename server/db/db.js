@@ -89,6 +89,13 @@ exports.getCrawlsInCity = (location, cb) => {
   });
 }
 
+exports.getAll = (cb) => {
+  Crawl.find({}, (err, crawls) => {
+    if (err) return console.log(err);
+    cb(crawls);
+  });
+}
+
 exports.deleteDatabaseData = () => {
   Crawl.remove().exec();
 }

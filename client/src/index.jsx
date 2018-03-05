@@ -64,6 +64,7 @@ class App extends React.Component {
     this.cancelCrawl = this.cancelCrawl.bind(this);
     this.handleFindSearch = this.handleFindSearch.bind(this);
     this.handleFacebookClick = this.handleFacebookClick.bind(this);
+    this.getIntialCrawlList = this.getIntialCrawlList.bind(this);
   }
 
   handleSearch (searchText) {
@@ -91,6 +92,15 @@ handleFindSearch (searchText) {
     let location = {city: searchText}
     $.post('/FindCrawls', location, (data) => {
       console.log("handleFindSearch data", data);
+      this.setState({
+        crawlList: data
+      });
+    });
+  }
+
+  getIntialCrawlList() {
+    // console.log('is this getting called');
+    $.get('/all', data => {
       this.setState({
         crawlList: data
       });
@@ -288,7 +298,11 @@ handleFindSearch (searchText) {
         {this.state.activeItem === 'find' &&
         <Grid celled>
         <Grid.Row>
-        <FindPage onSubmit={this.handleFindSearch} crawls={this.state.crawlList}/>
+        <FindPage
+          onSubmit={this.handleFindSearch}
+          crawls={this.state.crawlList}
+          getIntialCrawlList={this.getIntialCrawlList}
+        />
         </Grid.Row>
         </Grid>
         }
