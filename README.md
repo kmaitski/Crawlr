@@ -35,7 +35,7 @@ Development info:
 Localhost port = 1337  
 Mongo database = crawlr  
 Passport configs in config directory  
-Testing with mocha(test directory) and circleci(.circleci directory)  
+[npm run test] -> Testing with mocha(test directory) and circleci(.circleci directory)  
 [npm run client-watch] for constant webpack compiling  
 index.jsx -> main component  
 
