@@ -31,76 +31,18 @@ class App extends React.Component {
       directionMapView: false,
       city: ''
     }
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleBarAdd = this.handleBarAdd.bind(this);
-    this.handleBarRemove = this.handleBarRemove.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleUserCreation = this.handleUserCreation.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
+    this.getIntialCrawlList = this.getIntialCrawlList.bind(this);
+    this.handleFindSearch = this.handleFindSearch.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleBarAdd = this.handleBarAdd.bind(this);
+    this.handleBarRemove = this.handleBarRemove.bind(this);
     this.createCrawl = this.createCrawl.bind(this);
     this.saveCrawl = this.saveCrawl.bind(this);
     this.cancelCrawl = this.cancelCrawl.bind(this);
-    this.handleFindSearch = this.handleFindSearch.bind(this);
-    this.getIntialCrawlList = this.getIntialCrawlList.bind(this);
-  }
-
-  //handles city search from create a crawl, makes a post request for bars at that city and sets the state with the new info and changes a view state
-  //called in Search.jsx
-  handleSearch (searchText) {
-    this.setState({searchValue: searchText});
-    let location = {location: searchText};
-    $.post('/Search', location, (data) => {
-      this.setState({
-        barList: data.barList || [],
-        location: data.coor,
-        landingPageView: false,
-        city: searchText
-      });
-    });
-  }
-
-  //handles city search from find a crawl, makes a post request, that gets routed to our data base and returns crawls from the database that belong to the city that was being searched
-  //called in FindPage.jsx
-  handleFindSearch (searchText) {
-    this.setState({findSearch: searchText});
-    let location = {city: searchText};
-    $.post('/FindCrawls', location, (data) => {
-      this.setState({
-        crawlList: data
-      });
-    });
-  }
-
-  //gets all the crawls for intial loading of find a crawl
-  //called in FindPage.jsx
-  getIntialCrawlList() {
-    $.get('/all', data => {
-      this.setState({
-        crawlList: data
-      });
-    });
-  }
-
-  //adds a new bar to state when a marker is double clicked in create a crawl
-  //called in BarMap.jsx
-  handleBarAdd(bar) {
-    var newBarList = this.state.barAdded;
-    newBarList.push(bar);
-    this.setState({
-      barAdded: newBarList,
-      crawlListView: true
-    });
-  }
-
-  //removes a bar from state when the user clicks an x in create a crawl
-  //called in CrawlEntry.jsx
-  handleBarRemove(e) {
-    var newBarList = this.state.barAdded;
-    newBarList.splice(e.target.name, 1);
-    this.setState({
-      barAdded: newBarList
-    });
   }
 
   //changes what feature is shown (home, find a crawl, create a crawl)
@@ -144,6 +86,64 @@ class App extends React.Component {
       this.setState({
         activeItem: 'home'
       });
+    });
+  }
+
+  //gets all the crawls for intial loading of find a crawl
+  //called in FindPage.jsx
+  getIntialCrawlList() {
+    $.get('/all', data => {
+      this.setState({
+        crawlList: data
+      });
+    });
+  }
+
+  //handles city search from find a crawl, makes a post request, that gets routed to our data base and returns crawls from the database that belong to the city that was being searched
+  //called in FindPage.jsx
+  handleFindSearch (searchText) {
+    this.setState({findSearch: searchText});
+    let location = {city: searchText};
+    $.post('/FindCrawls', location, (data) => {
+      this.setState({
+        crawlList: data
+      });
+    });
+  }
+
+  //handles city search from create a crawl, makes a post request for bars at that city and sets the state with the new info and changes a view state
+  //called in Search.jsx
+  handleSearch (searchText) {
+    this.setState({searchValue: searchText});
+    let location = {location: searchText};
+    $.post('/Search', location, (data) => {
+      this.setState({
+        barList: data.barList || [],
+        location: data.coor,
+        landingPageView: false,
+        city: searchText
+      });
+    });
+  }
+
+  //adds a new bar to state when a marker is double clicked in create a crawl
+  //called in BarMap.jsx
+  handleBarAdd(bar) {
+    var newBarList = this.state.barAdded;
+    newBarList.push(bar);
+    this.setState({
+      barAdded: newBarList,
+      crawlListView: true
+    });
+  }
+
+  //removes a bar from state when the user clicks an x in create a crawl
+  //called in CrawlEntry.jsx
+  handleBarRemove(e) {
+    var newBarList = this.state.barAdded;
+    newBarList.splice(e.target.name, 1);
+    this.setState({
+      barAdded: newBarList
     });
   }
 
@@ -199,7 +199,7 @@ class App extends React.Component {
             active={this.state.activeItem === 'home'}
             onClick={this.handleMenuClick}
           >
-          Home
+            Home
           </Menu.Item>
           <Menu.Item
             name='find'
@@ -207,7 +207,7 @@ class App extends React.Component {
             active={this.state.activeItem === 'find'}
             onClick={this.handleMenuClick}
           >
-          Find a Crawl
+            Find a Crawl
           </Menu.Item>
           <Menu.Item
             name='create'
@@ -215,7 +215,7 @@ class App extends React.Component {
             active={this.state.activeItem === 'create'}
             onClick={this.handleMenuClick}
           >
-          Create a Crawl
+            Create a Crawl
           </Menu.Item>
           <div className="right menu">
             <Button
@@ -223,14 +223,14 @@ class App extends React.Component {
               name="login"
               onClick={this.handleButtonClick}
             >
-            Log In
+              Log In
             </Button>
             <Button
               role="button"
               name="signup"
               onClick={this.handleButtonClick}
             >
-            Sign Up!
+              Sign Up!
             </Button>
             <Button>
               <div href="/logout">Log Out</div>
