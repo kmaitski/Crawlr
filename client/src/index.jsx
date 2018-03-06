@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import HomePage from './HomePage.jsx';
+import FindPage from './FindPage.jsx';
+import LandingPage from './LandingPage.jsx';
 import Search from './Search.jsx';
+import MapContainer from './MapContainer.jsx';
 import CrawlEntryList from './CrawlEntryList.jsx';
 import CrawlCreateForm from './CrawlCreateForm.jsx'
-import MapContainer from './MapContainer.jsx';
 import DirectionsMap from './DirectionsMap.jsx';
-import LoginView from "./LoginView.jsx"
-import SignupView from "./SignupView.jsx"
+import LoginView from "./LoginView.jsx";
+import SignupView from "./SignupView.jsx";
+
 import $ from 'jquery';
 import { Grid, Menu, Button } from 'semantic-ui-react';
-import LandingPage from './LandingPage.jsx';
-import FindPage from './FindPage.jsx';
-import HomePage from './HomePage.jsx';
 
 class App extends React.Component {
   constructor(props) {
