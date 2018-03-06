@@ -32,9 +32,8 @@ module.exports = function(passport) {
           newUser.local.password = password;
           newUser.save(function(err) {
             if(err) {
-              throw err;
+              console.log(err);
             }
-            console.log('newuser here -> ', newUser);
             return done(null, newUser);
           })
         }
@@ -86,7 +85,7 @@ module.exports = function(passport) {
 
           newUser.save(function(err) {
             if (err) {
-              throw err;
+              console.log(err);
             } return done(null, newUser);
           })
         }
