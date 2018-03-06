@@ -3,7 +3,6 @@ import React from 'react';
 class FindCrawlEntry extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       bars: this.props.crawl.bars,
       crawlName: this.props.crawl.name,
@@ -11,6 +10,7 @@ class FindCrawlEntry extends React.Component {
     }
   }
 
+  //You'll probably want to move client side API keys like the one on line 22 to an untracked config file.
   render() {
     return (
       <div
@@ -40,7 +40,3 @@ class FindCrawlEntry extends React.Component {
 }
 
 export default FindCrawlEntry;
-    // <img
-    //   style={{width: "150px", height: "150px", float: "right"}}
-    //   src={'https://maps.googleapis.com/maps/api/place/photo?photoreference=' + props.crawl.bars[2].photo + '&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyCKqcPwsHVZEmOPMQkCmIGNvNLfV0TVyZc'}
-    // />

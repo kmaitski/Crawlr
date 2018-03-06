@@ -4,7 +4,6 @@ import { Input } from 'semantic-ui-react';
 import FindCrawlList from './FindCrawlList.jsx';
 import DirectionsMap from'./DirectionsMap.jsx';
 import FindCrawlSingleEntry from './FindCrawlSingleEntry.jsx';
-import {Grid} from 'semantic-ui-react';
 
 class FindPage extends React.Component {
   constructor(props) {
@@ -21,11 +20,9 @@ class FindPage extends React.Component {
     this.submitClick = this.submitClick.bind(this);
     this.entryClick = this.entryClick.bind(this);
     this.goBackToEntries = this.goBackToEntries.bind(this);
-    // console.log(this.props.crawls.length);
   }
 
   componentDidMount() {
-    // console.log('mounted');
     this.props.getIntialCrawlList();
   }
 
@@ -36,18 +33,12 @@ class FindPage extends React.Component {
     });
   }
   submitClick(e) {
-    // e.stopPropagation();
-    // e.nativeEvent.stopImmediatePropagation();
-    // console.log(this.props);
-    // console.log('hit submitclick in search.jsx');
-    this.props.onSubmit(this.state.searchText);
-    this.setState({allView: false});
-    // this.setState({entryView: true});
     e.preventDefault();
+    this.props.handleSubmit(this.state.searchText);
+    this.setState({allView: false});
   }
 
   entryClick(state) {
-    // console.log(state);
     this.setState({
       directionView: true,
       bars: state.bars,
@@ -57,7 +48,6 @@ class FindPage extends React.Component {
   }
 
   goBackToEntries() {
-    console.log(1);
     this.setState({
       entryView: true,
       directionView: false

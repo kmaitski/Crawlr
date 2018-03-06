@@ -8,10 +8,8 @@ class BarMap extends React.Component {
     this.state = {
       selected: {}
     };
-    // console.log(this.props);
     this.handleWindowClick = this.handleWindowClick.bind(this);
   }
-
 
   handleWindowClick() {
     this.props.addbar(this.state.selected);
@@ -26,6 +24,8 @@ class BarMap extends React.Component {
     }
   }
 
+  //For more info on Google-maps-react here's the docs we used. https://github.com/fullstackreact/google-maps-react It's a good adaptation of built in maps but is missing some features. We had trouble implementing info windows with "Add this to bar list" events using this module, so feel free to try something else if you want that functionality!
+
   loadMap() {
     if (this.props && this.props.google) {
       const barmap = this;
@@ -35,7 +35,6 @@ class BarMap extends React.Component {
       const mapRef = document.getElementById('map');
       const node = ReactDOM.findDOMNode(mapRef);
       const mapConfig = Object.assign({}, {
-
         center: location,
         zoom: 13,
         getsureHandling: 'cooperative',
