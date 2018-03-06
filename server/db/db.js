@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017');
 
-exports.db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
   }
 });
 
-exports.User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 const crawlSchema = mongoose.Schema({
   name: String,
@@ -35,9 +35,9 @@ const crawlSchema = mongoose.Schema({
   directions: String
 })
 
-exports.Crawl = mongoose.model('Crawl', crawlSchema);
+const Crawl = mongoose.model('Crawl', crawlSchema);
 
-exports.saveUser = function(data) {
+const saveUser = function(data) {
   var newUser = new User(data);
   newUser.save(function (err) {
     if (err) {
@@ -46,7 +46,7 @@ exports.saveUser = function(data) {
   });
 };
 
-exports.saveCrawl = function(data) {
+const saveCrawl = function(data) {
   var newCrawl = {
     name: data.name,
     description: data.description,
