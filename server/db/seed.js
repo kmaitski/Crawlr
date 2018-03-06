@@ -34,11 +34,9 @@ db.once('open', function() {
   db.db.dropDatabase();
 })
 
-// Step 2: Add data from `data.json`
-
 var userSchema = mongoose.Schema({
   local: {
-    username: String, //{type: String, index: {unique: true}},
+    username: String,
     password: String
   },
   facebook: {
