@@ -23,21 +23,21 @@ Specifics in package.json
 
 Installing Dependencies
 ------------------------
-run mongoDB server
-
-From within the root directory:
-node ./server/db/seed.js
-npm install
-npm start
+run mongoDB server  
+  
+From within the root directory:  
+node ./server/db/seed.js  
+npm install  
+npm start  
 
 Development info:
 ------------------
-Localhost port = 1337
-Mongo database = crawlr
-Passport configs in config directory
-Testing with mocha(test directory) and circleci(.circleci directory)
-[npm run client-watch] for constant webpack compiling
-index.jsx -> main component
+Localhost port = 1337  
+Mongo database = crawlr  
+Passport configs in config directory  
+Testing with mocha(test directory) and circleci(.circleci directory)  
+[npm run client-watch] for constant webpack compiling  
+index.jsx -> main component  
 
 Contributing
 -------------
