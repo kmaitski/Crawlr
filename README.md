@@ -1,20 +1,20 @@
 Crawlr
 =======
-Find/Create bar crawls near you or anywhere!
+Find/Create bar crawls near you or anywhere!  
 
 Questions?
 ==========
-Contact us in slack!
+Contact us in slack!  
 
 Team
 -----
-Product Owner: Sam Donner
-Scrum Master: Ryan Morrow
-Development Team Members: Kevin Doddy, Kevin Maitski
+Product Owner: Sam Donner  
+Scrum Master: Ryan Morrow  
+Development Team Members: Kevin Doddy, Kevin Maitski  
 
 Requirements
 -------------
-MongoDB server
+MongoDB server  
 node
 
 Development
