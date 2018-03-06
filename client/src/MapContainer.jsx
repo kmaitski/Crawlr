@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {GoogleApiWrapper} from 'google-maps-react';
 import BarMap from './BarMap.jsx';
-import axios from 'axios';
-import $ from 'jquery';
 
 class MapContainer extends React.Component {
   constructor(props) {
@@ -14,12 +12,13 @@ class MapContainer extends React.Component {
   render() {
     return (
       <div>
-      <BarMap
-      addbar={this.props.addbar}
-      baradded={this.props.baradded}
-      barlist={this.props.barlist}
-      location={this.props.location}
-      google={this.props.google} />
+        <BarMap
+          addbar={this.props.addbar}
+          baradded={this.props.baradded}
+          barlist={this.props.barlist}
+          location={this.props.location}
+          google={this.props.google} 
+        />
       </div>
     )
   }
