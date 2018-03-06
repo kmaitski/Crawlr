@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Grid, Menu } from 'semantic-ui-react';
 
 const CrawlCreateForm = (props) => {
 return (
