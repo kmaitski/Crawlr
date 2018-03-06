@@ -8,9 +8,9 @@ Contact us in slack!
 
 Team
 -----
-Product Owner: Sam Donner  
-Scrum Master: Ryan Morrow  
-Development Team Members: Kevin Doddy, Kevin Maitski  
+* `Product Owner` : Sam Donner  
+* `Scrum Master` : Ryan Morrow  
+* `Development Team Members` : Kevin Doddy, Kevin Maitski  
 
 Requirements
 -------------
