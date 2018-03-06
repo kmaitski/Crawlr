@@ -4,7 +4,6 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017');
 
 var db = mongoose.connection;
 
-//testing connection
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('connected');
@@ -12,7 +11,7 @@ db.once('open', function() {
 
 var userSchema = mongoose.Schema({
   local: {
-    username: String, //{type: String, index: {unique: true}},
+    username: String,
     password: String
   },
   facebook: {
@@ -38,25 +37,16 @@ var crawlSchema = mongoose.Schema({
 
 var Crawl = mongoose.model('Crawl', crawlSchema);
 
-// var displayCrawls = function(cb) {
-//   Crawl.find({}).exec(function (err, r) {
-//     if (err) throw err;
-//     cb(r)
-//   })
-// };
-
 var saveUser = function(data) {
   var newUser = new User(data);
   newUser.save(function (err) {
-    if (err) {console.log(err)} else {
-    console.log('saved user!')
-  }
+    if (err) {
+      console.error(err)
+    }
   })
 };
 
 var saveCrawl = function(data) {
-  // console.log('data in saveCrawl', data)
-  // console.log(data);
   var newCrawl = {
     name: data.name,
     description: data.description,
@@ -64,18 +54,13 @@ var saveCrawl = function(data) {
     bars: []
   }
   for (var i = 0; i<data.bars.length; i++) {
-    console.log(data.bars[0].photos[0].photo_reference);
     newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[i].photos[0].photo_reference, formatted_address: data.bars[i].formatted_address});
   }
 
   newCrawl = new Crawl(newCrawl);
   newCrawl.save(function (err) {
-    if (err) {console.log(err)} else {
-      // console.log(1);
-      // Crawl.find({}, (err, data) => {
-      //   console.log(data);
-      // });
-    console.log('saved crawl!');
+    if (err) {
+      console.log(err)
     }
   });
 };
@@ -83,8 +68,9 @@ var saveCrawl = function(data) {
 exports.getCrawlsInCity = (location, cb) => {
   console.log(location);
   Crawl.find({city: {$regex: new RegExp(location, "i")}}, (err, crawls) => {
-    if (err) return console.log(err);
-    // console.log(crawls);
+    if (err) {
+      console.log(err)
+    };
     cb(crawls);
   });
 }
