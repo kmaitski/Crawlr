@@ -1,36 +1,44 @@
- Project Name
-Pithy project description
+Crawlr
+=======
+Find/Create bar crawls near you or anywhere!
+
+Questions?
+==========
+Contact us in slack!
 
 Team
-Product Owner: teamMember
-Scrum Master: teamMember
-Development Team Members: teamMember, teamMember
-Table of Contents
-Usage
-Requirements
-Development
-Installing Dependencies
-Tasks
-Team
-Contributing
-Usage
-Some usage instructions
+-----
+Product Owner: Sam Donner
+Scrum Master: Ryan Morrow
+Development Team Members: Kevin Doddy, Kevin Maitski
 
 Requirements
-Node 0.10.x
-Redis 2.6.x
-Postgresql 9.1.x
-etc
-etc
+-------------
+MongoDB server
+node
+
 Development
+------------
+Specifics in package.json
+
 Installing Dependencies
+------------------------
+run mongoDB server
+
 From within the root directory:
-
-sudo npm install -g bower
+node ./server/db/seed.js
 npm install
-bower install
-Roadmap
-View the project roadmap here
+npm start
+
+Development info:
+------------------
+Localhost port = 1337
+Mongo database = crawlr
+Passport configs in config directory
+Testing with mocha(test directory) and circleci(.circleci directory)
+[npm run client-watch] for constant webpack compiling
+index.jsx -> main component
 
 Contributing
-See CONTRIBUTING.md for contribution guidelines.
+-------------
+Be the first!
