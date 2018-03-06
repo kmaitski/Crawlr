@@ -26,9 +26,11 @@ Installing Dependencies
 run mongoDB server  
   
 From within the root directory:  
+```javascript
 node ./server/db/seed.js  
 npm install  
 npm start  
+```
 
 Development info:
 ------------------
