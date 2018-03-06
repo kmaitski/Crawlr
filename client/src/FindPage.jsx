@@ -26,12 +26,12 @@ class FindPage extends React.Component {
     this.props.getIntialCrawlList();
   }
 
-
   handleInputChange(e) {
     this.setState({
       searchText: e.target.value
     });
   }
+
   submitClick(e) {
     e.preventDefault();
     this.props.handleSubmit(this.state.searchText);
