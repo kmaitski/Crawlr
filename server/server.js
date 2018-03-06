@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const axios = require('axios');
 const $ = require('jquery');
 const request = require('request');
 const mongoose = require('mongoose');
@@ -40,7 +39,6 @@ server.get('/Crawl', function(req, res) {
 });
 
 server.post('/create', function(req, res) {
-  //console.log(req.body);
   saveCrawl(req.body);
   res.end();
 });
@@ -54,7 +52,6 @@ server.get('/auth/facebook/callback',
     failureRedirect: '/'
   }),
   function(req, res) {
-    // Successful authentication, redirect home.
     res.redirect('/');
   });
 
@@ -79,7 +76,6 @@ server.get('/logout', function(req, res) {
 // app.get('/myCrawls', isLoggedIn function(req, res) {
 //   res.redirect('/myCrawls', {user: req.user})
 // });
-/////
 
 server.post('/Search', (req, res) => {
   let location = req.body.location;
@@ -115,45 +111,27 @@ server.post('/Search', (req, res) => {
             coor: coordinates
           };
         }
-        // console.log(coordinatesAndBars);
         res.send(coordinatesAndBars);
-      // };
       });
     }
   });
 });
 
 server.post('/FindCrawls', (req, res) => {
-  // console.log(req.body)
   db.getCrawlsInCity(req.body.city, crawls => {
-    // console.log(crawls);
     res.send(crawls);
   });
-  // res.end();
-});
-
-server.get('/delete123', (req, res) => {
-  db.deleteDatabaseData();
-  res.end();
 });
 
 server.get('/all', (req, res) => {
-  // console.log('am I in the server')
-  db.getAll(crawls => {
-    console.log(crawls);
+  db.getAll(crawls => {;
     res.send(crawls);
   });
 });
-
-// server.post('/Crawl', function(req, res) {
-
-//   res.send(data);
-// });
-
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
     return next();
   }
-  res.redirect('/'); //should redirect to login page
+  res.redirect('/');
 }
