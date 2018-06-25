@@ -9,7 +9,7 @@ const SignupView = props => (
         <form>
           <p> Username: </p> <input className="username" type="username" />
           <p> Password: </p> <input className="password" type="password" />
-          <input onClick={props.submit} type="submit"></input>
+          <input onClick={props.submit} type="submit" />
         </form>
       </Grid.Column>
     </Grid.Row>

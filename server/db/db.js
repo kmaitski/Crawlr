@@ -33,13 +33,13 @@ const crawlSchema = mongoose.Schema({
   creator: String,
   attendies: Array,
   directions: String
-})
+});
 
 const Crawl = mongoose.model('Crawl', crawlSchema);
 
 const saveUser = function(data) {
   var newUser = new User(data);
-  newUser.save(function (err) {
+  newUser.save(function(err) {
     if (err) {
       console.error(err);
     }
@@ -54,11 +54,16 @@ const saveCrawl = function(data) {
     bars: []
   };
   for (var i = 0; i < data.bars.length; i++) {
-    newCrawl.bars.push({name: data.bars[i].name, rating: data.bars[i].rating, photo: data.bars[i].photos[0].photo_reference, formatted_address: data.bars[i].formatted_address});
+    newCrawl.bars.push({
+      name: data.bars[i].name,
+      rating: data.bars[i].rating,
+      photo: data.bars[i].photos[0].photo_reference,
+      formatted_address: data.bars[i].formatted_address
+    });
   }
 
   newCrawl = new Crawl(newCrawl);
-  newCrawl.save(function (err) {
+  newCrawl.save(function(err) {
     if (err) {
       console.log(err);
     }
@@ -67,10 +72,10 @@ const saveCrawl = function(data) {
 
 exports.getCrawlsInCity = (location, cb) => {
   console.log(location);
-  Crawl.find({city: {$regex: new RegExp(location, "i")}}, (err, crawls) => {
+  Crawl.find({ city: { $regex: new RegExp(location, 'i') } }, (err, crawls) => {
     if (err) {
       console.log(err);
-    };
+    }
     cb(crawls);
   });
 };

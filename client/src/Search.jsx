@@ -6,7 +6,7 @@ class Search extends React.Component {
     super(props);
     this.state = {
       searchText: ''
-    }
+    };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submitClick = this.submitClick.bind(this);
   }
@@ -25,20 +25,19 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={(e) => {this.submitClick(e)}}>
+        <form
+          onSubmit={e => {
+            this.submitClick(e);
+          }}
+        >
           <Input
             className="input"
-            type = "text"
+            type="text"
             value={this.state.searchText}
             onChange={this.handleInputChange}
             placeholder="Enter city... "
           />
-          <Input
-            type="submit"
-            icon="search"
-            value="Search"
-          >
-          </Input>
+          <Input type="submit" icon="search" value="Search" />
         </form>
       </div>
     );

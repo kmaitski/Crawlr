@@ -9,16 +9,16 @@ const LoginView = props => (
         <form>
           <p> Username: </p> <input className="username" type="username" />
           <p> Password: </p> <input className="password" type="password" />
-          <input onClick={props.submit} type="submit"></input>
+          <input onClick={props.submit} type="submit" />
         </form>
       </Grid.Column>
       <Grid.Column width={8}>
         <h2>Log in through Facebook</h2>
-        <Button
-          role="button"
-          color='facebook'
-          href="/auth/facebook">
-          <div name="facebook"> <Icon name='facebook' /></div>
+        <Button role="button" color="facebook" href="/auth/facebook">
+          <div name="facebook">
+            {' '}
+            <Icon name="facebook" />
+          </div>
         </Button>
       </Grid.Column>
     </Grid.Row>
